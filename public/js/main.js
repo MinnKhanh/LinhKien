@@ -97,14 +97,6 @@
         autoplay: false
     });
 
-    /*--------------------------
-        Select
-    ----------------------------*/
-    $("select").niceSelect();
-
-    /*-------------------
-		Radio Btn
-	--------------------- */
     $(".product__color__select label, .shop__sidebar__size label, .product__details__option__size label").on('click', function () {
         $(".product__color__select label, .shop__sidebar__size label, .product__details__option__size label").removeClass('active');
         $(this).addClass('active');
@@ -211,6 +203,19 @@
                 $(this).text(Math.ceil(now));
             }
         });
+    });
+
+     window.addEventListener('show-toast', event => {
+        let type = event.detail.type;
+        let message = event.detail.message;
+        Swal.fire({
+            title: message,
+            icon: type,
+            confirmButtonText: 'OK',
+            showCancelButton: false,
+            showCloseButton: true
+        });
+        return;
     });
 
 })(jQuery);

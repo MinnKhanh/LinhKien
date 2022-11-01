@@ -31,6 +31,7 @@ Route::group([
     'prefix' => 'shop',
 ], static function () {
     Route::get('/', [Shop::class, 'index'])->name('index');
+    Route::get('/detail', [Shop::class, 'detail'])->name('detail');
 });
 Route::group([
     'as'     => 'cart.',

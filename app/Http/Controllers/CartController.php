@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class CartController extends Controller
 {
@@ -12,7 +14,14 @@ class CartController extends Controller
     }
     public function checkout(Request $request)
     {
-        return view('service.checkout');
+        if (Cart::where('user', 1)->sum('quantity') <= 0) {
+            return Redirect::back()->withErrors(['msg' => 'Vui lòng thêm sảm phẩm vào giỏ hàng']);
+        }
+        $discount = '';
+        if ($request->input('discount')) {
+            $discount = $request->input('discount');
+        }
+        return view('service.checkout', ['discount' => $discount]);
     }
     public function contact(Request $request)
     {

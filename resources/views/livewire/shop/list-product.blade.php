@@ -85,7 +85,8 @@
                                             <div class="shop__sidebar__brand">
                                                 <ul>
                                                     <li wire:key="itembrand-0">
-                                                        <label class="d-block" for="brand-0"><a>Tất cả</a></label>
+                                                        <label class="d-block" for="brand-0"><a>Tất
+                                                                cả</a></label>
                                                         <input type="radio" id="brand-0" class="d-none"
                                                             wire:model="brand" name="brand" value="">
                                                     </li>
@@ -113,7 +114,8 @@
                                             <div class="shop__sidebar__price">
                                                 <ul>
                                                     <li>
-                                                        <label class="d-block" for="price-0"><a>Tất cả</a></label>
+                                                        <label class="d-block" for="price-0"><a>Tất
+                                                                cả</a></label>
                                                         <input type="radio" id="price-0" class="d-none"
                                                             wire:model="price" name="price" value="">
                                                     </li>
@@ -192,15 +194,16 @@
                                         style='background-image: url("{{ asset('storage/product/' . $item['img'][0]['image_name']) }}");'
                                         data-setbg="{{ asset('storage/product/' . $item['img'][0]['image_name']) }}">
                                         <ul class="product__hover">
-                                            <li><a href="#"><img src="img/icon/heart.png" alt=""></a>
+                                            <li wire:click="addFavorite({{ $item['id'] }})"><a><img
+                                                        src="img/icon/heart.png" alt=""></a>
                                             </li>
-                                            <li><a href="#"><img src="img/icon/search.png" alt=""></a>
+                                            <li><a><img src="img/icon/search.png" alt=""></a>
                                             </li>
                                         </ul>
                                     </div>
                                     <div class="product__item__text">
                                         <h6>{{ $item['product_name'] }}</h6>
-                                        <a wire:click="addToCart(1,{{ $item['id'] }},1,{{ $item['price'] }},{{ $item['name'] }})"
+                                        <a wire:click="addToCart(1,{{ $item['id'] }},1,{{ $item['price'] }},'{{ $item['product_name'] }}')"
                                             style="cursor: pointer;" class="add-cart">+ Add To Cart</a>
                                         <div class="rating">
                                             <i class="fa fa-star-o"></i>
@@ -229,12 +232,9 @@
         </div>
     </section>
     <script>
-        // document.addEventListener('DOMContentLoaded', function() {
-        //     // $('#typefilter').change(function() {
-        //     //     let data = $('#typefilter').val();
-        //     //     console.log( data)
-        //     // })
-        // })
+        document.addEventListener('DOMContentLoaded', function() {
+            $(".nice-scroll").niceScroll()
+        })
     </script>
 
 </div>

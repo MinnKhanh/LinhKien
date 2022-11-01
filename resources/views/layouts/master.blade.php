@@ -23,12 +23,56 @@
     <link rel="stylesheet" href="{{ asset('css/slicknav.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
     @stack('css')
+    <style>
+        .notifi {
+            position: fixed;
+            top: 1rem;
+            right: 2rem;
+        }
+
+        .notification {
+            /* display: block; */
+            background-color: white;
+            /* border: 1px solid; */
+            outline: 1px solid gray;
+            z-index: 1;
+            border-radius: 2px;
+        }
+
+        .toast-header {
+            padding: 0rem .5rem;
+            background-color: #ffeb00c2;
+        }
+    </style>
 </head>
 
 <body>
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
+    </div>
+
+    <div class="notifi">
+        @if ($errors->has('msg'))
+            <div role="alert" aria-live="assertive" aria-atomic="true" class="notification error msg mb-3"
+                data-autohide="false">
+                <div class="toast-header d-flex justify-content-between">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                            <path
+                                d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
+                        </svg>
+                        <strong class="ml-1">Notification</strong>
+                    </div>
+                    <small class="text-muted"></small>
+                </div>
+                <div class="toast-body">
+                    <div class="error">{{ $errors->first('msg') }}</div>
+                </div>
+            </div>
+        @endif
     </div>
 
     <!-- Offcanvas Menu Begin -->
@@ -211,17 +255,17 @@
     <!-- Search End -->
     <!-- Js Plugins -->
     @livewireScripts
-    <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script>
-    <script src="{{ asset('js/jquery.nicescroll.min.js') }}"></script>
-    <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
-    <script src="{{ asset('js/jquery.countdown.min.js') }}"></script>
-    <script src="{{ asset('js/jquery.slicknav.js') }}"></script>
-    <script src="{{ asset('js/mixitup.min.js') }}"></script>
-    <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('js/main.js') }}"></script>
+    @include('layouts._script')
     @stack('js')
+    <script>
+        if ($('.msg').length) {
+            $('.error').toast('show')
+            const myTimeout = setTimeout(function() {
+                $('.error').toast('hide')
+                clearTimeout(myTimeout);
+            }, 2000);
+        }
+    </script>
 </body>
 
 </html>

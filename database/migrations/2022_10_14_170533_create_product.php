@@ -42,35 +42,12 @@ return new class extends Migration
             $table->string('vendor_website');
             $table->timestamps();
         });
-        Schema::create('order', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('user_id')->unsigned();
-            $table->string('user_address');
-            $table->string('vendor_address');
-            $table->integer('total');
-            $table->integer('amount');
-            $table->integer('status');
-            $table->timestamps();
-        });
-        Schema::create('orderDetail', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('product_id')->unsigned();
-            $table->integer('total');
-            $table->integer('amount');
-            $table->timestamps();
-        });
         Schema::create('category', function (Blueprint $table) {
             $table->id();
             $table->string('category_name');
             $table->timestamps();
         });
-        Schema::create('discount', function (Blueprint $table) {
-            $table->id();
-            $table->integer('discount_type');
-            $table->integer('discount_percent');
-            $table->integer('discount_value');
-            $table->timestamps();
-        });
+
         Schema::create('brand', function (Blueprint $table) {
             $table->id();
             $table->string('brand_name');

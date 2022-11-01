@@ -5,9 +5,14 @@ namespace App\Http\Livewire\Shop;
 use App\Models\Brand;
 use App\Models\Cart;
 use App\Models\Categories;
+use App\Models\Favorite;
 use App\Models\Product;
+use Exception;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Throwable;
 
 class ListProduct extends Component
 {
@@ -22,13 +27,11 @@ class ListProduct extends Component
     protected $paginationTheme = 'bootstrap';
     public function mount()
     {
+
         $this->perPage = 6;
     }
     public function render()
     {
-        // if ($this->filter) {
-        //     dd('chay');
-        // }
         $products = Product::with('Img');
 
         if ($this->category)
@@ -55,24 +58,57 @@ class ListProduct extends Component
         $products = $products->paginate(6);
         return view('livewire.shop.list-product', ['categories' => $categoies, 'products' => $products, 'brands' => $brands]);
     }
-    public function addToCart($user_id, $product_id, $quantity, $price_product, $name)
+    public function addToCart($user_id = null, $product_id = null, $quantity = null, $price_product = null, $name = null)
     {
-        $this->dispatchBrowserEvent('show-toast', ['type' => 'warning', 'message' => 'Mã danh mục phụ tùng đã tồn ']);
-        // $cart = Cart::where('user', $user_id)->where('product', $product_id);
-        // $isexsts = Cart::where('user', $user_id)->where('product', $product_id)->count();
-        // if (!$isexsts) {
-        //     $cart = new Cart();
-        //     $cart->user = $user_id;
-        //     $cart->product = $product_id;
-        //     $cart->quantity = $quantity;
-        //     $cart->price = $price_product;
-        //     $cart->total_price = $price_product;
-        //     $cart->product_name = $name;
-        // } else {
-        //     $cart->quantity = $cart->quantity + $quantity;
-        //     $cart->total_price = ($price_product * $quantity) + $cart->total_price;
-        // }
-        // $cart->save();
+        DB::beginTransaction();
+        try {
+            $product = Product::where('id', $product_id)->first();
+            if ($product->amount < $quantity)
+                throw new Exception("Thêm thất bại", 400);
+            $cart = Cart::where('user', $user_id)->where('product', $product_id);
+            $isexsts = $cart->count();
+            if (!$isexsts) {
+                $cart = new Cart();
+                $cart->user = $user_id;
+                $cart->product = $product_id;
+                $cart->quantity = $quantity;
+                $cart->price = $price_product;
+                $cart->product_name = $name;
+                $cart->save();
+            } else {
+                $oldcart = $cart->first();
+                $cart->update([
+                    'quantity' => $oldcart->quantity + $quantity,
+                ]);
+            }
+            $product->update([
+                'amount' => $product->amount - $quantity
+            ]);
+            DB::commit();
+            $this->dispatchBrowserEvent('show-toast', ['type' => 'success', 'message' => "Thêm thành công"]);
+        } catch (Throwable $th) {
+            DB::rollBack();
+            $this->dispatchBrowserEvent('show-toast', ['type' => 'error', 'message' => "Thêm thất bại"]);
+            return;
+        }
+    }
+    public function addFavorite($product)
+    {
+        DB::beginTransaction();
+        try {
+            if (Favorite::where('product', $product)->where('user', 1)->count())
+                throw new Exception("Đã có trong danh sách yêu thích", 400);
+            Favorite::create([
+                'user' => 1,
+                'product' => $product
+            ]);
+            DB::commit();
+            $this->dispatchBrowserEvent('show-toast', ['type' => 'success', 'message' => "Đã thêm vào danh sách yêu thích"]);
+        } catch (Throwable $th) {
+            DB::rollBack();
+            $this->dispatchBrowserEvent('show-toast', ['type' => 'error', 'message' =>  $th->getMessage()]);
+            return;
+        }
     }
     public function updatingNameSearch()
     {
@@ -83,6 +119,10 @@ class ListProduct extends Component
         $this->resetPage();
     }
     public function updatingPrice()
+    {
+        $this->resetPage();
+    }
+    public function updatingBrand()
     {
         $this->resetPage();
     }

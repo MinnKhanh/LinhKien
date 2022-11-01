@@ -1,4 +1,12 @@
-    <!-- Breadcrumb Section Begin -->
+@push('css')
+    <style>
+        .countproduct {
+            width: 6rem;
+            text-align: center;
+        }
+    </style>
+@endpush
+<div>
     <section class="breadcrumb-option">
         <div class="container">
             <div class="row">
@@ -16,8 +24,6 @@
         </div>
     </section>
     <!-- Breadcrumb Section End -->
-    <input type="text" wire:model="name">
-    {{ $name }}
     <!-- Shopping Cart Section Begin -->
     <section class="shopping-cart spad">
         <div class="container">
@@ -34,98 +40,49 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="product__cart__item">
-                                        <div class="product__cart__item__pic">
-                                            <img src="img/shopping-cart/cart-1.jpg" alt="">
-                                        </div>
-                                        <div class="product__cart__item__text">
-                                            <h6>T-shirt Contrast Pocket</h6>
-                                            <h5>$98.49</h5>
-                                        </div>
-                                    </td>
-                                    <td class="quantity__item">
-                                        <div class="quantity">
-                                            <div class="pro-qty-2">
-                                                <input type="text" value="1">
+                                @php
+                                    $totalPrice = 0;
+                                @endphp
+                                @forelse ($carts as $item)
+                                    @php
+                                        $totalPrice += $item['price'] * $item['quantity'];
+                                    @endphp
+                                    <tr>
+                                        <td class="product__cart__item">
+                                            <div class="product__cart__item__pic">
+                                                <img style="height: 5rem;"
+                                                    src="{{ asset('storage/product/' . $item['img'][0]['image_name']) }}"
+                                                    alt="">
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td class="cart__price">$ 30.00</td>
-                                    <td class="cart__close"><i class="fa fa-close"></i></td>
-                                </tr>
-                                <tr>
-                                    <td class="product__cart__item">
-                                        <div class="product__cart__item__pic">
-                                            <img src="img/shopping-cart/cart-2.jpg" alt="">
-                                        </div>
-                                        <div class="product__cart__item__text">
-                                            <h6>Diagonal Textured Cap</h6>
-                                            <h5>$98.49</h5>
-                                        </div>
-                                    </td>
-                                    <td class="quantity__item">
-                                        <div class="quantity">
-                                            <div class="pro-qty-2">
-                                                <input type="text" value="1">
+                                            <div class="product__cart__item__text">
+                                                <h6>{{ $item['product_name'] }}</h6>
+                                                <h5>{{ number_format($item['price'], 0, ',', ',') }} Đ</h5>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td class="cart__price">$ 32.50</td>
-                                    <td class="cart__close"><i class="fa fa-close"></i></td>
-                                </tr>
-                                <tr>
-                                    <td class="product__cart__item">
-                                        <div class="product__cart__item__pic">
-                                            <img src="img/shopping-cart/cart-3.jpg" alt="">
-                                        </div>
-                                        <div class="product__cart__item__text">
-                                            <h6>Basic Flowing Scarf</h6>
-                                            <h5>$98.49</h5>
-                                        </div>
-                                    </td>
-                                    <td class="quantity__item">
-                                        <div class="quantity">
-                                            <div class="pro-qty-2">
-                                                <input type="text" value="1">
+                                        </td>
+                                        <td class="quantity__item">
+                                            <div class="quantity">
+                                                <div class="">
+                                                    <input class="countproduct" data-id="{{ floatval($item['id']) }}"
+                                                        value="{{ $item['quantity'] }}" type="number" min=0
+                                                        max={{ $data[$item['id']] + $item['amount'] }}>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td class="cart__price">$ 47.00</td>
-                                    <td class="cart__close"><i class="fa fa-close"></i></td>
-                                </tr>
-                                <tr>
-                                    <td class="product__cart__item">
-                                        <div class="product__cart__item__pic">
-                                            <img src="img/shopping-cart/cart-4.jpg" alt="">
-                                        </div>
-                                        <div class="product__cart__item__text">
-                                            <h6>Basic Flowing Scarf</h6>
-                                            <h5>$98.49</h5>
-                                        </div>
-                                    </td>
-                                    <td class="quantity__item">
-                                        <div class="quantity">
-                                            <div class="pro-qty-2">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="cart__price">$ 30.00</td>
-                                    <td class="cart__close"><i class="fa fa-close"></i></td>
-                                </tr>
+                                        </td>
+                                        <td class="cart__price">
+                                            {{ number_format($item['price'] * $item['quantity'], 0, ',', ',') }} Đ</td>
+                                        <td class="cart__close"><i class="fa fa-close"
+                                                wire:click="changeCart([{{ $item['id'] }},0])"></i></td>
+                                    </tr>
+                                @empty
+                                @endforelse
+
                             </tbody>
                         </table>
                     </div>
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="continue__btn">
-                                <a href="#">Continue Shopping</a>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="continue__btn update__btn">
-                                <a href="#"><i class="fa fa-spinner"></i> Update cart</a>
+                                <a href="{{ route('shop.index') }}">Continue Shopping</a>
                             </div>
                         </div>
                     </div>
@@ -133,21 +90,46 @@
                 <div class="col-lg-4">
                     <div class="cart__discount">
                         <h6>Discount codes</h6>
-                        <form action="#">
-                            <input type="text" placeholder="Coupon code">
-                            <button type="submit">Apply</button>
+                        <form>
+                            <input type="text" wire:model.defer="discountcode" placeholder="Coupon code">
+                            <button type="submit" wire:click.prevent="addDiscount">Apply</button>
                         </form>
                     </div>
                     <div class="cart__total">
                         <h6>Cart total</h6>
                         <ul>
-                            <li>Subtotal <span>$ 169.50</span></li>
-                            <li>Total <span>$ 169.50</span></li>
+                            <li>Subtotal <span>{{ number_format($totalPrice, 0, ',', ',') }} Đ</span></li>
+                            <li>Total <span>{{ number_format($totalPrice - $discountprice, 0, ',', ',') }} Đ</span>
+                            </li>
                         </ul>
-                        <a href="#" class="primary-btn">Proceed to checkout</a>
+                        <button class="primary-btn" type="button" wire:click="checkout"
+                            style="color:white;width: 100%;">Proceed
+                            to checkout</button>
+                        </form>
+
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Shopping Cart Section End -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            $('.countproduct').change(function(event) {
+                event.preventDefault()
+                let value = $(this).parent().find('.countproduct').val();
+                let id = $(this).parent().find('.countproduct').attr('data-id')
+                if (value > parseInt($(this).parent().find('.countproduct').attr('max'))) {
+                    $(this).parent().find('.countproduct').val(parseInt($(this).parent().find(
+                        '.countproduct').attr('max')));
+                }
+                if (value < 0) {
+                    $(this).parent().find('.countproduct').val(0);
+                }
+                window.livewire.emit('changeCart', {
+                    0: id,
+                    1: value
+                });
+            })
+        })
+    </script>
+</div>
