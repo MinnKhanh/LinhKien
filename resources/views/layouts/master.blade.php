@@ -144,19 +144,19 @@
                 <div class="col-lg-6 col-md-6">
                     <nav class="header__menu mobile-menu">
                         <ul>
-                            <li class="active"><a href="./index.html">Home</a></li>
-                            <li><a href="./shop.html">Shop</a></li>
-                            <li><a href="#">Pages</a>
+                            <li class="{{ $active == 1 ? 'active' : '' }}"><a href="{{ route('home') }}">Home</a>
+                            </li>
+                            <li class="{{ $active == 2 ? 'active' : '' }}"><a
+                                    href="{{ route('shop.index') }}">Shop</a></li>
+                            <li class="{{ $active == 3 ? 'active' : '' }}"><a href="#">Pages</a>
                                 <ul class="dropdown">
-                                    <li><a href="./about.html">About Us</a></li>
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shopping-cart.html">Shopping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
+                                    <li><a href="{{ route('shop.index') }}">About Us</a></li>
+                                    <li><a href="{{ route('cart.index') }}">Shopping Cart</a></li>
+                                    <li><a href="{{ route('shop.index') }}">Blog Details</a></li>
                                 </ul>
                             </li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contacts</a></li>
+                            <li class="{{ $active == 4 ? 'active' : '' }}"><a href="./blog.html">Blog</a></li>
+                            <li class="{{ $active == 5 ? 'active' : '' }}"><a href="./contact.html">Contacts</a></li>
                         </ul>
                     </nav>
                 </div>

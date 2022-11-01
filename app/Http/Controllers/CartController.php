@@ -4,10 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Redirect;
 
 class CartController extends Controller
 {
+    public function __construct()
+    {
+        View::share('active', 3);
+    }
     public function index(Request $request)
     {
         return view('service.cart');
