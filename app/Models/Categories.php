@@ -9,5 +9,9 @@ class Categories extends Model
 {
     use HasFactory;
     protected $table = 'category';
-    protected $fillable = ['category_name'];
+    protected $fillable = ['category_name', 'description'];
+    public function Img()
+    {
+        return $this->morphMany(Img::class, 'product_id', 'image_type');
+    }
 }

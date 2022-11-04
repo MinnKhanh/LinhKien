@@ -9,3 +9,4 @@
     <script src="{{ asset('js/mixitup.min.js') }}"></script>
     <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ asset('js/select2/select2.min.js') }}"></script>

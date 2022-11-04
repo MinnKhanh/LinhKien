@@ -1,7 +1,10 @@
 <?php
 
-
-use App\Http\Controllers\CartController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\Shop;
 use App\Http\Livewire\Service\Cart;
@@ -19,9 +22,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 
@@ -50,4 +53,44 @@ Route::group([
 });
 Route::get('/test', function () {
     return view('test');
+});
+
+
+Route::group([
+    'as'     => 'admin.',
+    'prefix' => 'admin',
+], static function () {
+    Route::get('/home', [AdminController::class, 'index'])->name('index');
+    Route::group([
+        'as'     => 'product.',
+        'prefix' => 'product',
+    ], static function () {
+        Route::get('/', [ProductController::class, 'index'])->name('index');
+        Route::get('/create', [ProductController::class, 'create'])->name('create');
+        Route::get('/update', [ProductController::class, 'update'])->name('update');
+    });
+    Route::group([
+        'as'     => 'category.',
+        'prefix' => 'category',
+    ], static function () {
+        Route::get('/', [CategoryController::class, 'index'])->name('index');
+        Route::get('/create', [CategoryController::class, 'create'])->name('create');
+        Route::get('/update', [CategoryController::class, 'update'])->name('update');
+    });
+    Route::group([
+        'as'     => 'brand.',
+        'prefix' => 'brand',
+    ], static function () {
+        Route::get('/', [BrandController::class, 'index'])->name('index');
+        Route::get('/create', [BrandController::class, 'create'])->name('create');
+        Route::get('/update', [BrandController::class, 'update'])->name('update');
+    });
+    Route::group([
+        'as'     => 'vendor.',
+        'prefix' => 'vendor',
+    ], static function () {
+        Route::get('/', [VendorController::class, 'index'])->name('index');
+        Route::get('/create', [VendorController::class, 'create'])->name('create');
+        Route::get('/update', [VendorController::class, 'update'])->name('update');
+    });
 });

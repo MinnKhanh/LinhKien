@@ -15,4 +15,8 @@ class Brand extends Model
         'brand_description',
         'brand_website'
     ];
+    public function Img()
+    {
+        return $this->morphMany(Img::class, 'product_id', 'image_type');
+    }
 }

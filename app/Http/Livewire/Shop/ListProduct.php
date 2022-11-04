@@ -32,7 +32,7 @@ class ListProduct extends Component
     }
     public function render()
     {
-        $products = Product::with('Img');
+        $products = Product::with('Img')->where('status', 1);
 
         if ($this->category)
             $products->where('category_id', $this->category);
