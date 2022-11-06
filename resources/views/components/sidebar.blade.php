@@ -7,8 +7,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
-                aria-controls="ui-basic">
+            <a class="nav-link" data-bs-toggle="collapse" aria-expanded="false" aria-controls="ui-basic">
                 <i class="fa-solid fa-list menu-icon"></i>
                 <span class="menu-title">Loại sản phẩm</span>
                 <i class="menu-arrow"></i>
@@ -24,8 +23,7 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#products" aria-expanded="false"
-                aria-controls="products">
+            <a class="nav-link" data-bs-toggle="collapse" aria-expanded="false" aria-controls="products">
                 <i class="fa-solid fa-boxes-stacked menu-icon"></i>
                 <span class="menu-title">Sản phẩm</span>
                 <i class="menu-arrow"></i>
@@ -42,7 +40,7 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#brand" aria-expanded="false" aria-controls="brand">
+            <a class="nav-link" data-bs-toggle="collapse" aria-expanded="false" aria-controls="brand">
                 <i class="fa-solid fa-shopping-cart menu-icon"></i>
                 <span class="menu-title">Nhãn hàng</span>
                 <i class="menu-arrow"></i>
@@ -59,7 +57,7 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#vendor" aria-expanded="false" aria-controls="vendor">
+            <a class="nav-link" data-bs-toggle="collapse" aria-expanded="false" aria-controls="vendor">
                 <i class="fa-solid fa-shop menu-icon"></i>
                 <span class="menu-title">Nhà cung cấp</span>
                 <i class="menu-arrow"></i>

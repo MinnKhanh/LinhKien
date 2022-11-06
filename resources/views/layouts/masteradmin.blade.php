@@ -163,6 +163,77 @@
         .nav-item {
             position: relative !important;
         }
+
+        .notifi {
+            position: fixed;
+            top: 1rem;
+            right: 2rem;
+        }
+
+        .notification {
+            /* display: block; */
+            background-color: white;
+            /* border: 1px solid; */
+            outline: 1px solid gray;
+            z-index: 1;
+            border-radius: 2px;
+        }
+
+        .toast-header {
+            padding: 0rem .5rem;
+            background-color: #ffeb00c2;
+        }
+
+        .pagination {
+            padding-top: 25px;
+            text-align: center !important;
+            justify-content: center;
+        }
+
+        .pagination li {
+            text-align: center !important;
+            margin: 0px .2rem;
+        }
+
+        .page-item.active .page-link {
+            border-color: #111111;
+            color: black !important;
+            background: transparent;
+        }
+
+        .pagination .page-link {
+            display: inline-block !important;
+            font-size: 16px;
+            font-weight: 700;
+            color: #111111;
+            height: 30px;
+            width: 30px;
+            border-radius: 50% !important;
+            line-height: 30px;
+            text-align: center;
+            align-items: center;
+            padding: 0;
+
+        }
+
+        .pagination li.active {
+            border-color: #111111;
+        }
+
+        .pagination li:hover {
+            border-color: #111111;
+        }
+
+        .category {
+            color: gray !important;
+        }
+
+        .category:hover,
+        .category:focus {
+            text-decoration: none;
+            outline: none;
+            color: black !important;
+        }
     </style>
     @stack('css')
 </head>
@@ -180,28 +251,10 @@
         </div>
     </div>
     <!-- plugins:js -->
-    <script src="{{ asset('admin/vendors/base/vendor.bundle.base.js') }}"></script>
-    <!-- endinject -->
-    <!-- Plugin js for this page-->
-    <script src="{{ asset('admin/vendors/datatables.net/jquery.dataTables.js') }}"></script>
-    <!-- End plugin js for this page-->
-    <!-- inject:js -->
-    <script src="{{ asset('admin/js/off-canvas.js') }}"></script>
-    <script src="{{ asset('admin/js/hoverable-collapse.js') }}"></script>
-    <script src="{{ asset('admin/js/template.js') }}"></script>
-    <!-- endinject -->
-    <!-- Custom js for this page-->
-    <script src="{{ asset('admin/js/dashboard.js') }}"></script>
-    <script src="{{ asset('admin/js/data-table.js') }}"></script>
-    <script src="{{ asset('admin/js/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('admin/js/dataTables.bootstrap4.js') }}"></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/highcharts-3d.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com/modules/export-data.js"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
     @include('layouts._script')
-    @yield('scripts') @livewireScripts @stack('script')
+    @livewireScripts
+    @stack('js')
 </body>
 
 </html>
