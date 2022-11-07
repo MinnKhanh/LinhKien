@@ -1,0 +1,284 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.visible-print-block {
+    display: block !important;
+}
+
+body {
+    font: 14px/1.4 Helvetica, sans-serif;
+    letter-spacing: 0.3px;
+}
+
+#page-wrap {
+    width: 800px;
+    margin: 0 auto;
+}
+
+p {
+    font: 13px Helvetica, sans-serif;
+}
+
+#logo {
+    text-align: center;
+    position: relative;
+    margin-top: 25px;
+    border: 1px solid #fff;
+    overflow: hidden;
+}
+
+#logo img {
+    max-width: 540px;
+    max-height: 100px;
+}
+
+#header>h3 {
+    font: 16px Helvetica, sans-serif;
+    font-weight: bold;
+    line-height: 0.5;
+}
+
+#logo:hover,
+#logo.edit {
+    border: 1px solid #000;
+    margin-top: 0px;
+    max-height: 125px;
+}
+
+#logoctr {
+    display: none;
+}
+
+#logo:hover #logoctr,
+#logo.edit #logoctr {
+    display: block;
+    text-align: right;
+    line-height: 25px;
+    background: #eee;
+    padding: 0 5px;
+}
+
+#logohelp {
+    text-align: left;
+    display: none;
+    font-style: italic;
+    padding: 10px 5px;
+}
+
+#logohelp input {
+    margin-bottom: 5px;
+}
+
+.edit #logohelp {
+    display: block;
+}
+
+.edit #save-logo,
+.edit #cancel-logo {
+    display: inline;
+}
+
+.edit #image,
+#save-logo,
+#cancel-logo,
+.edit #change-logo,
+.edit #delete-logo {
+    display: none;
+}
+
+textarea {
+    border: 0;
+    font: 14px Helvetica, sans-serif;
+    overflow: auto;
+    resize: none
+}
+
+textarea:hover,
+textarea:focus,
+#items td.total-value textarea:hover,
+#items td.total-value textarea:focus,
+.delete:hover {
+    background-color: #EEFF88;
+}
+
+#details {
+    margin-top: 20px;
+    border: 2px solid #f0f0f0;
+    border-radius: 5px;
+    background: #fbfbfb;
+    -webkit-print-color-adjust: exact;
+}
+
+#details ul {
+    list-style: none;
+    padding: 10px;
+    margin: 0;
+}
+
+#details .col-xs-6 {
+    border-right: 2px solid #f0f0f0;
+    -webkit-print-color-adjust: exact;
+    padding: 0;
+    border-radius: 5px;
+
+}
+
+#details p {
+    display: block;
+    float: left;
+    font: 13px Helvetica, sans-serif;
+    color: #acacac;
+    -webkit-print-color-adjust: exact;
+}
+
+#details div[contenteditable],
+#details textarea {
+    width: 60%;
+    font: 13px Helvetica, sans-serif;
+    font-weight: bold;
+    background: #fbfbfb;
+    letter-spacing: 0.4px;
+}
+
+#note h3 {
+    font: 14px Helvetica, sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+#items textarea {
+    font: 12px Helvetica, sans-serif;
+}
+
+#items {
+    clear: both;
+    width: 100%;
+    margin: 30px 0 0 0;
+    font: 12px Helvetica, sans-serif;
+}
+
+#items textarea {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+#items tr.item-row td {
+    border: 0;
+    vertical-align: top;
+    padding: 10px 8px 10px 8px;
+    border: 2px solid #f0f0f0;
+}
+
+#items td .no {
+    width: 20px;
+}
+
+#items td .sku-code {
+    width: 60px;
+}
+
+#items td .description {
+    width: 180px;
+}
+
+#items td .order-no {
+    width: 70px;
+}
+
+#items td .seller-sku-code {
+    width: 100px;
+}
+
+#items td .brand,
+#items td .color,
+#items td .size,
+#items td .qty {
+    width: 30px;
+}
+
+#items td .cost {
+    width: 50px;
+}
+
+#items td.description textarea {
+    width: 100%;
+}
+
+tr:nth-child(odd) {
+    background-color: #eeeeee;
+    -webkit-print-color-adjust: exact;
+}
+
+#items td.total-line {
+    border-right: 0;
+    text-align: right;
+    font: 14px Helvetica, sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
+    background-color: #eeeeee;
+    -webkit-print-color-adjust: exact;
+}
+
+#items td.total-value {
+    border-left: 0;
+    padding: 10px;
+    font: 14px Helvetica, sans-serif;
+    font-weight: bold;
+    background-color: #eeeeee;
+    -webkit-print-color-adjust: exact;
+}
+
+#items td.total-value textarea {
+    height: 20px;
+    background: none;
+    font: 14px Helvetica, sans-serif;
+    font-weight: bold;
+    background-color: #eeeeee;
+    -webkit-print-color-adjust: exact;
+}
+
+#items td.balance {
+    background: #eee;
+}
+
+#items td.blank {
+    border: 0;
+    background-color: #eeeeee;
+    -webkit-print-color-adjust: exact;
+}
+
+#terms {
+    margin: 20px 0 0 0;
+}
+
+#terms h3 {
+    font: 14px Helvetica, sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+#terms ol {
+    margin-left: 5px;
+    padding: 5px;
+    font: 13px Helvetica, sans-serif;
+}
+
+.delete-wpr {
+    position: relative;
+}
+
+.delete {
+    display: block;
+    color: #000;
+    text-decoration: none;
+    position: absolute;
+    background: #EEEEEE;
+    font-weight: bold;
+    padding: 0px 3px;
+    border: 1px solid;
+    top: -6px;
+    left: -22px;
+    font-family: Verdana;
+    font-size: 12px;
+}

@@ -1,0 +1,52 @@
+* {
+  display: inherit;
+}
+
+#logo {
+  width: 100%
+}
+
+#logo img {
+  margin-left: 340px;
+  max-width: 540px;
+  max-height: 100px;
+}
+
+tr:nth-child(odd) {
+  background-color: #adadad;
+}
+
+#details {
+  background-color: #eeeeee !important;
+}
+
+.pull-left {
+  float: left !important;
+}
+
+.label {
+  border: none;
+  text-align: left;
+}
+
+table {
+  display: table;
+}
+
+tr {
+  display: table-row !important;
+}
+
+th,
+td {
+  display: table-cell !important;
+}
+
+textarea {
+  overflow: hidden;
+}
+
+#hiderow,
+.delete {
+  display: none !important;
+}

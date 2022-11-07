@@ -24,4 +24,12 @@ class Order extends Model
         'quantity',
         'status',
     ];
+    protected $casts = [
+        'created_at' => 'date:d/m/Y',
+        'updated_at' => 'date:d/m/Y',
+    ];
+    public function UserOrder()
+    {
+        return $this->belongsTo(User::class, 'user', 'id');
+    }
 }

@@ -207,6 +207,8 @@
                                     <li><a href="{{ route('shop.index') }}">Blog Details</a></li>
                                 </ul>
                             </li>
+                            <li class="{{ $active == 4 ? 'active' : '' }}"><a
+                                    href="{{ route('order.index') }}">Order</a></li>
                             <li class="{{ $active == 4 ? 'active' : '' }}"><a href="./blog.html">Blog</a></li>
                             <li class="{{ $active == 5 ? 'active' : '' }}"><a href="./contact.html">Contacts</a></li>
                         </ul>

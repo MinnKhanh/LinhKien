@@ -2,13 +2,16 @@
 
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\StatisticalController;
 use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController as ControllersOrderController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\Shop;
+use App\Models\OrderDetail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -106,5 +109,26 @@ Route::group([
     ], static function () {
         Route::get('/', [OrderController::class, 'index'])->name('index');
         Route::get('/detail', [OrderController::class, 'detailOrder'])->name('detail');
+        Route::get('/print-order', [OrderController::class, 'printOrder'])->name('prictorder');
+        Route::get('/sendmail', [OrderController::class, 'sendOrderToMail'])->name('sendmail');
     });
+    Route::group([
+        'as'     => 'customers.',
+        'prefix' => 'customers',
+    ], static function () {
+        Route::get('/', [CustomerController::class, 'index'])->name('index');
+        Route::get('/detail', [OrderController::class, 'detailOrder'])->name('detail');
+        Route::get('/sendmail', [OrderController::class, 'sendOrderToMail'])->name('sendmail');
+    });
+});
+Route::get('/test', function () {
+    dd(OrderDetail::where('order_id', 1)->get()->toArray());
+})->name('detail');
+Route::group([
+    'as'     => 'order.',
+    'prefix' => 'order',
+], static function () {
+    Route::get('/', [ControllersOrderController::class, 'index'])->name('index');
+    Route::get('/detail', [ControllersOrderController::class, 'detailOrder'])->name('detail');
+    Route::get('/sendmail', [ControllersOrderController::class, 'sendOrderToMail'])->name('sendmail');
 });
