@@ -27,16 +27,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-// ->whereYear('order.created_at', intval($request->input('year')));
-//             if ($request->input('typetime') == 2) {
-//                 $data->whereDay('order.created_at', $request->input('mounth'));
-//             }
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::group([
     'as'     => 'shop.',
     'prefix' => 'shop',
@@ -65,6 +58,7 @@ Route::get('/test', function () {
 Route::group([
     'as'     => 'admin.',
     'prefix' => 'admin',
+    'middleware' => 'auth'
 ], static function () {
     Route::group([
         'as'     => 'product.',
@@ -139,5 +133,5 @@ Route::group([
 ], static function () {
     Route::get('/', [UserController::class, 'index'])->name('index');
     Route::get('/update', [UserController::class, 'update'])->name('update');
-    Route::get('/favorite', [UserController::class, 'productFavorite'])->name('favorite');
+    Route::get('/favorite', [UserController::class, 'productFavorite'])->name('favorite')->middleware('auth');
 });

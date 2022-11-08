@@ -21,7 +21,7 @@
                     <div class="col-4">
                         <div class="card bg-light p-2">
                             <h5 class="border-bottom">Thông tin người nhận</h5>
-                            <p class="fw-bold">Tên khách hàng: {{ $order['username'] }}</p>
+                            <p class="fw-bold">Tên khách hàng: {{ $order['name'] }}</p>
                             <p>Địa chỉ:
                                 {{ $order['address'] . '-' . $order['district'] . '-' . $order['city'] }}
                             </p>
@@ -33,7 +33,7 @@
                             <h5 class="border-bottom">Hình thức giao hàng</h5>
                             <p>Giao trước: {{ $date }}</p>
                             <p>Đơn vị vẩn chuyển: <span class="fw-bold">Express</span></p>
-                            <p>Phí vận chuyển: {{ number_format($order['ship'] + 20000) }}Đ</p>
+                            <p>Phí vận chuyển: {{ number_format($order['ship']) }}Đ</p>
                         </div>
                     </div>
                     <div class="col-4">
