@@ -80,7 +80,7 @@
                                                     src="img/icon/heart.png" alt=""></a>
                                         </li>
                                     @else
-                                        <li><a href="{{ route('auth.login') }}"><img src="img/icon/heart.png"
+                                        <li><a href="{{ route('login') }}"><img src="img/icon/heart.png"
                                                     alt=""></a>
                                         </li>
                                     @endif
