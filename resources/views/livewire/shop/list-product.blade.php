@@ -31,6 +31,15 @@
                 white-space: nowrap;
                 width: auto;
             }
+
+            .link {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                /* z-index: -1; */
+            }
         </style>
     @endpush
     <section class="shop spad">
@@ -193,6 +202,8 @@
                                     <div class="product__item__pic set-bg"
                                         style='background-image: url("{{ asset('storage/product/' . $item['img'][0]['image_name']) }}");'
                                         data-setbg="{{ asset('storage/product/' . $item['img'][0]['image_name']) }}">
+                                        <a class="link"
+                                            href="{{ route('shop.detail', ['id' => $item['id']]) }}"></a>
                                         <ul class="product__hover">
                                             @if (auth()->check())
                                                 <li wire:click="addFavorite({{ $item['id'] }})"><a><img

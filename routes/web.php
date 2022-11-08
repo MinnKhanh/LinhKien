@@ -40,6 +40,7 @@ Route::group([
 Route::group([
     'as'     => 'cart.',
     'prefix' => 'cart',
+    'middleware' => 'auth'
 ], static function () {
     Route::get('/', [CartController::class, 'index'])->name('index');
     Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
