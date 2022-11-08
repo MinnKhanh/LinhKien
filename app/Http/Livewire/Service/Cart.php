@@ -24,8 +24,8 @@ class Cart extends Component
     }
     public function render()
     {
-        $this->carts = Product::with("Img")->join('cart', 'cart.product', 'product.id')->where('user', 1)->get()->toArray();
-        $this->data = Product::with("Img")->join('cart', 'cart.product', 'product.id')->where('user', 1)->pluck('quantity', 'id')->toArray();
+        $this->carts = Product::with("Img")->join('cart', 'cart.product', 'product.id')->where('user', auth()->user()->id)->get()->toArray();
+        $this->data = Product::with("Img")->join('cart', 'cart.product', 'product.id')->where('user', auth()->user()->id)->pluck('quantity', 'id')->toArray();
         return view('livewire.service.cart');
     }
     public function changeCart($data)
@@ -33,7 +33,7 @@ class Cart extends Component
         DB::beginTransaction();
         try {
             $product = Product::where('id', intval($data[0]))->first();
-            $cart = ModelsCart::where('user', 1)->where('product', intval($data[0]));
+            $cart = ModelsCart::where('user', auth()->user()->id)->where('product', intval($data[0]));
             if (intval($data[1]) <= 0) {
                 $product->amount = $product->amount + $this->data[$data[0]];
                 $product->save();
@@ -70,7 +70,7 @@ class Cart extends Component
             $exists = $discount->count();
             if ($exists) {
                 $discount = $discount->first();
-                $totalPrice = ModelsCart::where('user', 1)->sum(DB::raw('quantity*price'));
+                $totalPrice = ModelsCart::where('user', auth()->user()->id)->sum(DB::raw('quantity*price'));
                 if ($discount->unit == 1) {
                     $this->discountprice = (floatval($discount->percent) * $totalPrice) / 100;
                 } else {
@@ -88,7 +88,7 @@ class Cart extends Component
     }
     public function checkout()
     {
-        $quantityincart = Product::with("Img")->join('cart', 'cart.product', 'product.id')->where('user', 1)->sum('quantity');
+        $quantityincart = Product::with("Img")->join('cart', 'cart.product', 'product.id')->where('user', auth()->user()->id)->sum('quantity');
         if ($quantityincart <= 0) {
             $this->dispatchBrowserEvent('show-toast', ['type' => 'warning', 'message' => 'Hiện không có sản phẩm trong giỏ hàng']);
             return;

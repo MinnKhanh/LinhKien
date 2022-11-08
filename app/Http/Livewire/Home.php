@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Cart;
+use App\Models\Favorite;
 use App\Models\Product;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -54,6 +55,24 @@ class Home extends Component
         } catch (Throwable $th) {
             DB::rollBack();
             $this->dispatchBrowserEvent('show-toast', ['type' => 'error', 'message' => "Thêm thất bại"]);
+            return;
+        }
+    }
+    public function addFavorite($product)
+    {
+        DB::beginTransaction();
+        try {
+            if (Favorite::where('product', $product)->where('user', auth()->user()->id)->count())
+                throw new Exception("Đã có trong danh sách yêu thích", 400);
+            Favorite::create([
+                'user' => auth()->user()->id,
+                'product' => $product
+            ]);
+            DB::commit();
+            $this->dispatchBrowserEvent('show-toast', ['type' => 'success', 'message' => "Đã thêm vào danh sách yêu thích"]);
+        } catch (Throwable $th) {
+            DB::rollBack();
+            $this->dispatchBrowserEvent('show-toast', ['type' => 'error', 'message' =>  $th->getMessage()]);
             return;
         }
     }

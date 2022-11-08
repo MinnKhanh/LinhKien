@@ -32,7 +32,7 @@ class Checkout extends Component
     public $discountprice = 0;
     public function mount(Request $request)
     {
-        $cart = Cart::where('user', 1);
+        $cart = Cart::where('user', auth()->user()->id);
         $this->totalPrice = $cart->sum(DB::raw('quantity*price'));
         $this->quantity = $cart->sum(DB::raw('quantity'));
         $this->carts = $cart->get()->toArray();
@@ -70,7 +70,7 @@ class Checkout extends Component
                 $this->ship = 50000;
             }
             $order = new Order();
-            $order->user = 1;
+            $order->user = auth()->user()->id;
             $order->name = $this->name;
             $order->address = $this->address;
             $order->city = $this->city;
@@ -94,7 +94,7 @@ class Checkout extends Component
                     'price' => $item['price']
                 ]);
             }
-            Cart::where('user', 1)->delete();
+            Cart::where('user', auth()->user()->id)->delete();
             DB::commit();
             $this->dispatchBrowserEvent('show-toast', ['type' => 'success', 'message' => 'Tạo thành công']);
             return Redirect::route('shop.index');

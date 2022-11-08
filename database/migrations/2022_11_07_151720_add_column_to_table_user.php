@@ -17,8 +17,8 @@ class AddColumnToTableUser extends Migration
             $table->string('phone')->nullable();
             $table->string('city')->nullable();
             $table->string('district')->nullable();
-            $table->string('gender')->nullable();
-            $table->string('age')->nullable();
+            $table->integer('gender')->nullable();
+            $table->integer('age')->nullable();
             $table->string('provider_id')->nullable();
             $table->string('provider')->nullable();
         });

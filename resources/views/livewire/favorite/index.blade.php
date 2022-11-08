@@ -194,29 +194,17 @@
                                         style='background-image: url("{{ asset('storage/product/' . $item['img'][0]['image_name']) }}");'
                                         data-setbg="{{ asset('storage/product/' . $item['img'][0]['image_name']) }}">
                                         <ul class="product__hover">
-                                            @if (auth()->check())
-                                                <li wire:click="addFavorite({{ $item['id'] }})"><a><img
-                                                            src="img/icon/heart.png" alt=""></a>
-                                                </li>
-                                            @else
-                                                <li><a href="{{ route('auth.login') }}"><img src="img/icon/heart.png"
-                                                            alt=""></a>
-                                                </li>
-                                            @endif
+                                            <li wire:click="addFavorite({{ $item['id'] }})"><a><img
+                                                        src="img/icon/heart.png" alt=""></a>
+                                            </li>
                                             <li><a><img src="img/icon/search.png" alt=""></a>
                                             </li>
                                         </ul>
                                     </div>
                                     <div class="product__item__text">
                                         <h6>{{ $item['product_name'] }}</h6>
-                                        @if (auth()->check())
-                                            <a wire:click="addToCart({{ auth()->user()->id }},{{ $item['id'] }},1,{{ $item['price'] }},'{{ $item['product_name'] }}')"
-                                                style="cursor: pointer;" class="add-cart">+ Add To Cart</a>
-                                        @else
-                                            <a href="{{ route('login') }}" style="cursor: pointer;"
-                                                class="add-cart">+ Add To
-                                                Cart</a>
-                                        @endif
+                                        <a wire:click="addToCart(1,{{ $item['id'] }},1,{{ $item['price'] }},'{{ $item['product_name'] }}')"
+                                            style="cursor: pointer;" class="add-cart">+ Add To Cart</a>
                                         <div class="rating">
                                             <i class="fa fa-star-o"></i>
                                             <i class="fa fa-star-o"></i>

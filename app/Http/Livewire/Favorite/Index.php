@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Shop;
+namespace App\Http\Livewire\Favorite;
 
 use App\Models\Brand;
 use App\Models\Cart;
@@ -8,13 +8,12 @@ use App\Models\Categories;
 use App\Models\Favorite;
 use App\Models\Product;
 use Exception;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Throwable;
 
-class ListProduct extends Component
+class Index extends Component
 {
     use WithPagination;
     protected $perPage;
@@ -32,7 +31,7 @@ class ListProduct extends Component
     }
     public function render()
     {
-        $products = Product::with('Img')->where('status', 1);
+        $products = Product::with('Img')->where('status', 1)->join('favorite', 'favorite.product', 'product.id')->where('favorite.user', auth()->user()->id);
 
         if ($this->category)
             $products->where('category_id', $this->category);
@@ -56,7 +55,7 @@ class ListProduct extends Component
         //     dd($products);
         // }
         $products = $products->paginate(6);
-        return view('livewire.shop.list-product', ['categories' => $categoies, 'products' => $products, 'brands' => $brands]);
+        return view('livewire.favorite.index', ['categories' => $categoies, 'products' => $products, 'brands' => $brands]);
     }
     public function addToCart($user_id = null, $product_id = null, $quantity = null, $price_product = null, $name = null)
     {
@@ -96,10 +95,10 @@ class ListProduct extends Component
     {
         DB::beginTransaction();
         try {
-            if (Favorite::where('product', $product)->where('user', auth()->user()->id)->count())
+            if (Favorite::where('product', $product)->where('user', 1)->count())
                 throw new Exception("Đã có trong danh sách yêu thích", 400);
             Favorite::create([
-                'user' => auth()->user()->id,
+                'user' => 1,
                 'product' => $product
             ]);
             DB::commit();

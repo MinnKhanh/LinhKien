@@ -11,6 +11,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController as ControllersOrderController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\Shop;
+use App\Http\Controllers\UserController;
 use App\Models\OrderDetail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -131,4 +132,12 @@ Route::group([
     Route::get('/', [ControllersOrderController::class, 'index'])->name('index');
     Route::get('/detail', [ControllersOrderController::class, 'detailOrder'])->name('detail');
     Route::get('/sendmail', [ControllersOrderController::class, 'sendOrderToMail'])->name('sendmail');
+});
+Route::group([
+    'as'     => 'user.',
+    'prefix' => 'user',
+], static function () {
+    Route::get('/', [UserController::class, 'index'])->name('index');
+    Route::get('/update', [UserController::class, 'update'])->name('update');
+    Route::get('/favorite', [UserController::class, 'productFavorite'])->name('favorite');
 });
