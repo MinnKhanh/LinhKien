@@ -39,9 +39,9 @@ class Createorupdate extends Component
     {
         $this->validate([
             'name' => 'required',
-            'email' => 'required',
+            'email' => 'required|email',
             'address' => 'required',
-            'phone' => 'required',
+            'phone' => 'required|regex:/(01)[0-9]{9}/',
             'website' => 'required',
             'photo' => $this->isedit ? '' : 'required|file|mimes:jpeg,jpg,png,gif'
         ]);
@@ -85,9 +85,10 @@ class Createorupdate extends Component
     public function resetdata()
     {
         $this->name = '';
+        $this->address = '';
+        $this->phone = '';
         $this->website = '';
-        $this->description = '';
-        $this->nation = '';
         $this->photo = NULL;
+        $this->email = '';
     }
 }

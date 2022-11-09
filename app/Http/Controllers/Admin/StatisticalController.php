@@ -9,13 +9,21 @@ use Illuminate\Support\Facades\View;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class StatisticalController extends Controller
 {
     public function index()
     {
-        return view('admin.statistical.index');
+        $now = Carbon::now();
+        $month = $now->month;
+        $year = $now->year;
+        $orders = Order::whereMonth('created_at', $month)->whereYear('order.created_at', $year);
+        $ordersnumber = $orders->count();
+        $sales = $orders->sum('totalPrice');
+        $customernumber = User::join('model_has_permissions', 'model_has_permissions.model_id', 'users.id')->where('permission_id', '!=', 1)->count();
+        return view('admin.statistical.index', ['ordersnumber' => $ordersnumber, 'sales' => $sales, 'customernumber' => $customernumber]);
     }
     public function getdatachart(Request $request)
     {

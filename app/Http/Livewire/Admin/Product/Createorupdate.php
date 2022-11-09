@@ -50,6 +50,9 @@ class Createorupdate extends Component
     }
     public function render()
     {
+        // if ($this->photos) {
+        //     dd($this->photos);
+        // }
         return view('livewire.admin.product.createorupdate');
     }
     public function store()

@@ -1,18 +1,19 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
         <li class="nav-item">
-            <a class="nav-link" href="{{ url('/admin/dashboard') }}">
+            <a class="nav-link" href="{{ route('admin.main.index') }}">
                 <i class="mdi mdi-home menu-icon"></i>
                 <span class="menu-title">Dashboard</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" aria-expanded="false" aria-controls="ui-basic">
+            <a class="nav-link" data-toggle="collapse" href="#type" role="button" aria-expanded="false"
+                aria-controls="type">
                 <i class="fa-solid fa-list menu-icon"></i>
                 <span class="menu-title">Loại sản phẩm</span>
                 <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="ui-basic">
+            <div class="collapse" id="type">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.category.index') }}">Danh sách loại
                             sản
@@ -23,24 +24,24 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" aria-expanded="false" aria-controls="products">
+            <a class="nav-link" data-toggle="collapse" href="#product" role="button" aria-expanded="false"
+                aria-controls="product">
                 <i class="fa-solid fa-boxes-stacked menu-icon"></i>
                 <span class="menu-title">Sản phẩm</span>
                 <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="products">
+            <div class="collapse" id="product">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.product.index') }}">Danh sách sản
-                            phẩm</a>
-                    </li>
+                            phẩm</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.product.create') }}">Thêm sản
-                            phẩm</a>
-                    </li>
+                            phẩm</a></li>
                 </ul>
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" aria-expanded="false" aria-controls="brand">
+            <a class="nav-link" data-toggle="collapse" href="#brand" role="button" aria-expanded="false"
+                aria-controls="brand">
                 <i class="fa-solid fa-shopping-cart menu-icon"></i>
                 <span class="menu-title">Nhãn hàng</span>
                 <i class="menu-arrow"></i>
@@ -50,14 +51,15 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.brand.index') }}">Danh sách nhã
                             hàng</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.brand.index') }}">Thêm nhãn
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.brand.create') }}">Thêm nhãn
                             hàng</a>
                     </li>
                 </ul>
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" aria-expanded="false" aria-controls="vendor">
+            <a class="nav-link" data-toggle="collapse" href="#vendor" role="button" aria-expanded="false"
+                aria-controls="vendor">
                 <i class="fa-solid fa-shop menu-icon"></i>
                 <span class="menu-title">Nhà cung cấp</span>
                 <i class="menu-arrow"></i>
@@ -68,34 +70,28 @@
                             cung
                             cấp</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.vendor.index') }}">Thêm nhà cung
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.vendor.create') }}">Thêm nhà cung
                             cấp</a>
                     </li>
                 </ul>
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ url('/admin/color') }}">
-                <i class="fa-solid fa-palette menu-icon"></i>
-                <span class="menu-title">Màu</span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ url('/admin/slider') }}">
-                <i class="fa-sharp fa-solid fa-photo-film menu-icon"></i>
-                <span class="menu-title">Slider</span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ url('/admin/orders') }}">
+            <a class="nav-link" href="{{ route('admin.orders.index') }}">
                 <i class="fa-solid fa-clipboard-list menu-icon"></i>
                 <span class="menu-title">Đơn hàng</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ url('/admin/customers') }}">
+            <a class="nav-link" href="{{ route('admin.customers.index') }}">
                 <i class="mdi mdi-account menu-icon"></i>
                 <span class="menu-title">Khách hàng</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.statistical.index') }}">
+                <i class="fa-sharp fa-solid fa-bar-chart menu-icon"></i>
+                <span class="menu-title">Thống kê</span>
             </a>
         </li>
         <li class="nav-item">
@@ -122,7 +118,16 @@
                 <span class="menu-title">Liên hệ</span>
             </a>
         </li>
-
+        <li class="mt-5"
+            style="    background-color: blue;
+    width: 100%;
+    padding: 10px;
+    border-radius: 3px;padding-left: 2rem;">
+            <a class="" style="color:white;font-weight: 900;" href="{{ route('home') }}">
+                <i class="fas fa-arrow-left menu-icon"></i>
+                <span class="menu-title ml-1">Quay lại cửa hàng</span>
+            </a>
+        </li>
     </ul>
 </nav>
 

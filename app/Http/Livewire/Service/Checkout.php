@@ -45,6 +45,15 @@ class Checkout extends Component
                 $this->discountprice = $discount->percent;
             }
         }
+        if (auth()->check()) {
+            // dd(auth()->user()->address);
+            $this->name = auth()->user()->name;
+            $this->address = auth()->user()->address;
+            $this->city = auth()->user()->city;
+            $this->district = auth()->user()->district;
+            $this->phone = auth()->user()->phone;
+            $this->email = auth()->user()->email;
+        }
     }
     public function render()
     {
@@ -58,7 +67,7 @@ class Checkout extends Component
             'address' => 'required',
             'city' => 'required',
             'district' => 'required',
-            'phone' => 'required',
+            'phone' => 'required|regex:/[0-9]{9}/',
             'payment' => 'required',
             'email' => 'required|email',
         ]);

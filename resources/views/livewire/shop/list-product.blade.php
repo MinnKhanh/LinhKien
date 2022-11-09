@@ -43,6 +43,7 @@
         </style>
     @endpush
     <section class="shop spad">
+
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">

@@ -78,7 +78,7 @@
             <div class="col-4">
                 <div class="checkout__input">
                     <p>Giá Nhập<span>*</span></p>
-                    <input type="text" wire:model.defer="importprice">
+                    <input type="number" wire:model.defer="importprice">
                     <p class="error">
                         @error('importprice')
                             <strong>{{ $message }}</strong>
@@ -89,7 +89,7 @@
             <div class="col-4">
                 <div class="checkout__input">
                     <p>Giá Bán<span>*</span></p>
-                    <input type="text" wire:model.defer="price">
+                    <input type="number" wire:model.defer="price">
                     <p class="error">
                         @error('price')
                             <strong>{{ $message }}</strong>
@@ -100,7 +100,7 @@
             <div class="col-4">
                 <div class="checkout__input">
                     <p>Số Lượng<span>*</span></p>
-                    <input type="text" wire:model.defer="quantity">
+                    <input type="number" wire:model.defer="quantity">
                     <p class="error">
                         @error('quantity')
                             <strong>{{ $message }}</strong>
@@ -205,14 +205,9 @@
                     <div class="w-100">
                         <h6 class="mb-4">Ảnh Sản Phẩm</h6>
                         <div class="d-flex flex-wrap">
-                            @php
-                                $index = 0;
-                            @endphp
-                            @foreach ($listimg as $item)
+                            @foreach ($photos as $item)
                                 <div class="col-3">
-                                    @foreach ($photos as $item)
-                                        <img src='{{ $item->temporaryUrl() }}' alt="">
-                                    @endforeach
+                                    <img src='{{ $item->temporaryUrl() }}' alt="">
                                 </div>
                             @endforeach
                         </div>

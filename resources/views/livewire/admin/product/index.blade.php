@@ -24,7 +24,7 @@
                 <tr>
                     <th scope="col" class="text-center align-middle ">{{ $index++ }}</th>
                     <th scope="col" class="text-center align-middle "> <img
-                            src='{{ asset('storage/product/' . $item['img'][0]['image_name']) }}'
+                            src="{{ asset('storage/product/' . (isset($item['img'][0]) ? $item['img'][0]['image_name'] : '')) }}"
                             style="max-width: 20%;" alt=""></th>
                     <th scope="col" class="text-center align-middle ">{{ $item['product_name'] }}</th>
                     <th scope="col" class="text-center align-middle ">{{ $item['brand'] }}</th>

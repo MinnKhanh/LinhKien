@@ -11,12 +11,21 @@
         .categories__hot__deal img {
             height: 20rem !important;
         }
+
+        .link {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            /* z-index: -1; */
+        }
     </style>
 @endpush
 <div>
     <section class="hero mt-5">
         <div class="hero__slider owl-carousel mb-5">
-            <div class="hero__items set-bg" data-setbg="{{ asset('storage/home/10.jpg') }}">
+            <div class="hero__items set-bg" data-setbg="{{ asset('storage/home/1.jpg') }}">
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-5 col-lg-7 col-md-8">
@@ -32,7 +41,7 @@
                     </div>
                 </div>
             </div>
-            <div class="hero__items set-bg" data-setbg="{{ asset('storage/home/11.jpg') }}">
+            <div class="hero__items set-bg" data-setbg="{{ asset('storage/home/2.jpg') }}">
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-5 col-lg-7 col-md-8">
@@ -74,6 +83,7 @@
                             <div class="product__item__pic set-bg"
                                 style='background-image: url("{{ asset('storage/product/' . $item['img'][0]['image_name']) }}");'
                                 data-setbg="{{ asset('storage/product/' . $item['img'][0]['image_name']) }}">
+                                <a class="link" href="{{ route('shop.detail', ['id' => $item['id']]) }}"></a>
                                 <ul class="product__hover">
                                     @if (auth()->check())
                                         <li wire:click="addFavorite({{ $item['id'] }})"><a><img
@@ -117,6 +127,7 @@
                             <div class="product__item__pic set-bg"
                                 style='background-image: url("{{ asset('storage/product/' . $item['img'][0]['image_name']) }}");'
                                 data-setbg="{{ asset('storage/product/' . $item['img'][0]['image_name']) }}">
+                                <a class="link" href="{{ route('shop.detail', ['id' => $item['id']]) }}"></a>
                                 <ul class="product__hover">
                                     <li wire:click="addFavorite({{ $item['id'] }})"><a><img src="img/icon/heart.png"
                                                 alt=""></a>
@@ -159,7 +170,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="categories__hot__deal">
-                        <img src="{{ asset('storage/home/1.jpg') }}" alt="">
+                        <img src="{{ asset('storage/home/31.png') }}" alt="">
                         <div class="hot__deal__sticker">
                             <span>Sale Of</span>
                             <h5>10%</h5>
@@ -202,17 +213,17 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="instagram__pic">
-                        <div class="instagram__pic__item set-bg" data-setbg="{{ asset('storage/home/13.jpg') }}">
+                        <div class="instagram__pic__item set-bg" data-setbg="{{ asset('storage/home/22.jpg') }}">
                         </div>
-                        <div class="instagram__pic__item set-bg" data-setbg="{{ asset('storage/home/14.jpg') }}">
+                        <div class="instagram__pic__item set-bg" data-setbg="{{ asset('storage/home/23.jpg') }}">
                         </div>
-                        <div class="instagram__pic__item set-bg" data-setbg="{{ asset('storage/home/15.jpg') }}">
+                        <div class="instagram__pic__item set-bg" data-setbg="{{ asset('storage/home/24.jpg') }}">
                         </div>
-                        <div class="instagram__pic__item set-bg" data-setbg="{{ asset('storage/home/16.jpg') }}">
+                        <div class="instagram__pic__item set-bg" data-setbg="{{ asset('storage/home/25.jpg') }}">
                         </div>
-                        <div class="instagram__pic__item set-bg" data-setbg="{{ asset('storage/home/17.jpg') }}">
+                        <div class="instagram__pic__item set-bg" data-setbg="{{ asset('storage/home/26.jpg') }}">
                         </div>
-                        <div class="instagram__pic__item set-bg" data-setbg="{{ asset('storage/home/18.jpg') }}">
+                        <div class="instagram__pic__item set-bg" data-setbg="{{ asset('storage/home/27.jpg') }}">
                         </div>
                     </div>
                 </div>
@@ -241,36 +252,20 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="blog__item">
-                        <div class="blog__item__pic set-bg" data-setbg="{{ asset('storage/home/vendor-1.jpg') }}">
-                        </div>
-                        <div class="blog__item__text">
-                            <h5>What Curling Irons Are The Best Ones</h5>
-                            <a href="#">Read More</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="blog__item">
-                        <div class="blog__item__pic set-bg" data-setbg="{{ asset('storage/home/vendor-2.jpg') }}">
-                        </div>
-                        <div class="blog__item__text">
-                            <h5>Eternity Bands Do Last Forever</h5>
-                            <a href="#">Read More</a>
+                @forelse ($brands as $item)
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="blog__item">
+                            <div class="blog__item__pic set-bg"
+                                data-setbg="{{ asset('storage/home/' . (isset($item['img'][0]) ? $item['img'][0]['image_name'] : '')) }}">
+                            </div>
+                            <div class="blog__item__text">
+                                <h5>{{ $item['brand_description'] }}</h5>
+                                <a href="#">Read More</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="blog__item">
-                        <div class="blog__item__pic set-bg" data-setbg="{{ asset('storage/home/vendor-3.jpg') }}">
-                        </div>
-                        <div class="blog__item__text">
-                            <h5>The Health Benefits Of Sunglasses</h5>
-                            <a href="#">Read More</a>
-                        </div>
-                    </div>
-                </div>
+                @empty
+                @endforelse
 
             </div>
         </div>

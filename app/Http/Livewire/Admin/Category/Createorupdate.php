@@ -73,5 +73,6 @@ class Createorupdate extends Component
         $this->name = '';
         $this->description = '';
         $this->photo = NULL;
+        $this->img = '';
     }
 }

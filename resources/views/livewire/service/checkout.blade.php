@@ -37,7 +37,7 @@
                                 <div class="col-lg-12">
                                     <div class="checkout__input">
                                         <p>Name<span>*</span></p>
-                                        <input type="text" wire:model.defer="name">
+                                        <input type="text" style="color:black !important;" wire:model="name">
                                         <p class="error">
                                             @error('name')
                                                 <strong>{{ $message }}</strong>
@@ -48,7 +48,7 @@
                             </div>
                             <div class="checkout__input">
                                 <p>Country<span>*</span></p>
-                                <input type="text" wire:model.defer="country">
+                                <input type="text" style="color:black !important;" wire:model.defer="country">
                                 <p class="error">
                                     @error('country')
                                         <strong>{{ $message }}</strong>
@@ -57,8 +57,8 @@
                             </div>
                             <div class="checkout__input">
                                 <p>Address<span>*</span></p>
-                                <input type="text" wire:model.defer="address" placeholder="Street Address"
-                                    class="checkout__input__add">
+                                <input type="text" style="color:black !important;" wire:model.defer="address"
+                                    placeholder="Street Address" class="checkout__input__add">
                                 <p class="error">
                                     @error('address')
                                         <strong>{{ $message }}</strong>
@@ -67,7 +67,7 @@
                             </div>
                             <div class="checkout__input">
                                 <p>City<span>*</span></p>
-                                <input type="text" wire:model.defer="city">
+                                <input type="text" style="color:black !important;" wire:model.defer="city">
                                 <p class="error">
                                     @error('city')
                                         <strong>{{ $message }}</strong>
@@ -76,7 +76,7 @@
                             </div>
                             <div class="checkout__input">
                                 <p>District<span>*</span></p>
-                                <input type="text" wire:model.defer="district">
+                                <input type="text" style="color:black !important;" wire:model.defer="district">
                                 <p class="error">
                                     @error('district')
                                         <strong>{{ $message }}</strong>
@@ -87,7 +87,7 @@
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Phone<span>*</span></p>
-                                        <input type="text" wire:model.defer="phone">
+                                        <input type="text" style="color:black !important;" wire:model.defer="phone">
                                         <p class="error">
                                             @error('phone')
                                                 <strong>{{ $message }}</strong>
@@ -98,7 +98,7 @@
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Email<span>*</span></p>
-                                        <input type="text" wire:model.defer="email">
+                                        <input type="text" style="color:black !important;" wire:model.defer="email">
                                         <p class="error">
                                             @error('email')
                                                 <strong>{{ $message }}</strong>
@@ -109,7 +109,8 @@
                             </div>
                             <div class="checkout__input">
                                 <p>Order notes<span>*</span></p>
-                                <input type="text" wire:model.defer="note" placeholder="Notes about your order.">
+                                <input type="text" style="color:black !important;" wire:model.defer="note"
+                                    placeholder="Notes about your order.">
                                 <p class="error">
                                     @error('note')
                                         <strong>{{ $message }}</strong>

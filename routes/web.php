@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CustomerController;
@@ -30,6 +31,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/dash', [AdminController::class, 'index'])->name('dash');
 Route::group([
     'as'     => 'shop.',
     'prefix' => 'shop',
@@ -61,6 +63,13 @@ Route::group([
     'prefix' => 'admin',
     'middleware' => 'auth'
 ], static function () {
+    Route::group([
+        'as'     => 'main.',
+        'prefix' => 'main',
+    ], static function () {
+        Route::get('/', [AdminController::class, 'index'])->name('index');
+    });
+
     Route::group([
         'as'     => 'product.',
         'prefix' => 'product',

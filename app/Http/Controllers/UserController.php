@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        View::share('active', 5);
+        View::share('active', 0);
     }
     public function update()
     {

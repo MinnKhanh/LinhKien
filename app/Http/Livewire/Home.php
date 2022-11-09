@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Brand;
 use App\Models\Cart;
 use App\Models\Favorite;
 use App\Models\Product;
@@ -15,10 +16,12 @@ class Home extends Component
 {
     public $bestsellers;
     public $newarrival;
+    public $brands;
     public function mount()
     {
         $this->bestsellers = Product::with('Img')->join('orderdetail', 'orderdetail.product_id', 'product.id')->groupby('product.id', 'product.product_name', 'product.price')->select('product.id', 'product.product_name', 'product.price', DB::raw('count(product.id) as solan'))->orderby('solan', 'desc')->skip(0)->take(8)->get()->toArray();
         $this->newarrival = Product::with('Img')->orderby('created_at', 'desc')->skip(0)->take(8)->get()->toArray();
+        $this->brands = Brand::with('Img')->skip(0)->take(3)->get()->toArray();
     }
     public function render()
     {

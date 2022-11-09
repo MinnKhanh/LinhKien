@@ -7,7 +7,7 @@
     <meta name="keywords" content="Male_Fashion, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Male-Fashion | Template</title>
+    <title>Linh Kien</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
@@ -93,6 +93,12 @@
             text-decoration: none;
             outline: none;
             color: black !important;
+        }
+
+        #logo {
+            max-width: 25% !important;
+            position: absolute;
+            top: 2px;
         }
     </style>
 
@@ -181,18 +187,14 @@
                                         class="d-none">
                                         @csrf
                                     </form>
+                                    @if (Auth::user()->can('Admin'))
+                                        <a href="{{ route('admin.main.index') }}">Quản lý</a>
+                                    @endif
                                 @else
                                     <a href="{{ route('login') }}">Đăng nhập</a>
                                 @endif
                             </div>
-                            <div class="header__top__hover">
-                                <span>Usd <i class="arrow_carrot-down"></i></span>
-                                <ul>
-                                    <li>USD</li>
-                                    <li>EUR</li>
-                                    <li>USD</li>
-                                </ul>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -202,7 +204,8 @@
             <div class="row">
                 <div class="col-lg-3 col-md-3">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="{{ asset('storage/logo.jpgy7') }}" alt=""></a>
+                        <a href="./index.html"><img id="logo" src="{{ asset('storage/home/logo.png') }}"
+                                alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
@@ -228,9 +231,13 @@
                 </div>
                 <div class="col-lg-3 col-md-3">
                     <div class="header__nav__option">
-                        <a href="#" class="search-switch"><img src="img/icon/search.png" alt=""></a>
-                        <a href="#"><img src="img/icon/heart.png" alt=""></a>
-                        <a href="#"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
+                        <a href="#" class="search-switch"><img src="{{ asset('img/icon/search.png') }}"
+                                alt=""></a>
+                        <a href="{{ route('user.favorite') }}"><img src="{{ asset('img/icon/heart.png') }}"
+                                alt=""></a>
+                        <a href="{{ route('cart.index') }}"><img src="{{ asset('img/icon/cart.png') }}"
+                                alt="">
+                            <span>0</span></a>
                     </div>
                 </div>
             </div>
@@ -246,8 +253,9 @@
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
-                        <div class="footer__logo">
-                            <a href="#"><img src="img/footer-logo.png" alt=""></a>
+                        <div class="footer__logo" style="text-align: center">
+                            <a href="#"><img src="{{ asset('storage/home/logo.png') }}"
+                                    style="max-width: 30% !important;" alt=""></a>
                         </div>
                         <p>The customer is at the heart of our unique business model, which includes design.</p>
                         <a href="#"><img src="img/payment.png" alt=""></a>
@@ -255,29 +263,29 @@
                 </div>
                 <div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
                     <div class="footer__widget">
-                        <h6>Shopping</h6>
+                        <h6>Tiện ích</h6>
                         <ul>
-                            <li><a href="#">Clothing Store</a></li>
-                            <li><a href="#">Trending Shoes</a></li>
-                            <li><a href="#">Accessories</a></li>
-                            <li><a href="#">Sale</a></li>
+                            <li><a href="#">Cửa hàng linh kiện</a></li>
+                            <li><a href="#">hàng hóa ưa thích</a></li>
+                            <li><a href="#">Linh kiện</a></li>
+                            <li><a href="#">Bán hàng</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-3 col-sm-6">
                     <div class="footer__widget">
-                        <h6>Shopping</h6>
+                        <h6>Bán hàng</h6>
                         <ul>
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#">Payment Methods</a></li>
-                            <li><a href="#">Delivary</a></li>
-                            <li><a href="#">Return & Exchanges</a></li>
+                            <li><a href="#">Liên kết với chúng tôi</a></li>
+                            <li><a href="#">Phương thức thanh toán</a></li>
+                            <li><a href="#">Giao hàng</a></li>
+                            <li><a href="#">Trả và đổi trả</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
                     <div class="footer__widget">
-                        <h6>NewLetter</h6>
+                        <h6>Sản phẩm mới</h6>
                         <div class="footer__newslatter">
                             <p>Be the first to know about new arrivals, look books, sales & promos!</p>
                             <form action="#">

@@ -118,7 +118,7 @@
                     });
                 });
                 $('#typetime').change(function() {
-                    if ($(this).val() == 1) {
+                    if ($(this).val() == 2) {
                         $('#mounth').attr('disabled', true)
                     } else {
                         $('#mounth').attr('disabled', false)
