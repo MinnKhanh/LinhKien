@@ -68,7 +68,7 @@
                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                     <div class="blog__details__author">
                                         <div class="blog__details__author__pic">
-                                            <img src="img/blog/details/blog-author.jpg" alt="">
+                                            <img src="{{ asset('img/blog/details/blog-author.jpg') }}" alt="">
                                         </div>
                                         <div class="blog__details__author__text">
                                             <h5>Aiden Blair</h5>

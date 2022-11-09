@@ -110,7 +110,14 @@
             </li>
             <li class="nav-item nav-profile dropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
-                    <img src="images/faces/face5.jpg" alt="profile" />
+                    @php
+                        $img = App\Models\Img::where('product_id', auth()->user()->id)
+                            ->where('image_type', 'App\Models\User')
+                            ->first()->image_name;
+                        
+                    @endphp
+                    <img src="{{ asset('storage/user/' . (Auth::check() ? ($img ? $img : '') : '')) }}"
+                        alt="profile" />
                     <span class="nav-profile-name"> {{ Auth::check() ? Auth::user()->name : '' }}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">

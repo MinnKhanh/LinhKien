@@ -190,6 +190,8 @@
                                     @if (Auth::user()->can('Admin'))
                                         <a href="{{ route('admin.main.index') }}">Quản lý</a>
                                     @endif
+                                    {{-- <a href="{{ route('password.confirm') }}">Đổi mật khẩu</a> --}}
+                                    <a href="{{ route('user.update') }}">Cập nhật</a>
                                 @else
                                     <a href="{{ route('login') }}">Đăng nhập</a>
                                 @endif
@@ -217,14 +219,13 @@
                                     href="{{ route('shop.index') }}">Shop</a></li>
                             <li class="{{ $active == 3 ? 'active' : '' }}"><a href="#">Pages</a>
                                 <ul class="dropdown">
-                                    <li><a href="{{ route('shop.index') }}">About Us</a></li>
+                                    <li><a href="{{ route('service.aboutus') }}">About Us</a></li>
                                     <li><a href="{{ route('cart.index') }}">Shopping Cart</a></li>
-                                    <li><a href="{{ route('shop.index') }}">Blog Details</a></li>
+                                    <li><a href="{{ route('service.blog') }}">Blog Details</a></li>
                                 </ul>
                             </li>
                             <li class="{{ $active == 4 ? 'active' : '' }}"><a
                                     href="{{ route('order.index') }}">Order</a></li>
-                            <li class="{{ $active == 4 ? 'active' : '' }}"><a href="./blog.html">Blog</a></li>
                             <li class="{{ $active == 5 ? 'active' : '' }}"><a href="./contact.html">Contacts</a></li>
                         </ul>
                     </nav>

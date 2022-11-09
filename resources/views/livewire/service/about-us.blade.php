@@ -65,7 +65,7 @@
                     </p>
                     <div class="testimonial__author">
                         <div class="testimonial__author__pic">
-                            <img src="img/about/testimonial-author.jpg" alt="">
+                            <img src="{{ asset('img/about/testimonial-author.jpg') }}" alt="">
                         </div>
                         <div class="testimonial__author__text">
                             <h5>Augusta Schultz</h5>

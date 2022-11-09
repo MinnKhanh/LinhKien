@@ -29,6 +29,8 @@ class DetailProduct extends Component
         DB::beginTransaction();
         try {
             $product = Product::where('id', $this->product['id'])->first();
+            if ($this->quantity <= 0)
+                throw new Exception("Vui lòng nhập số lương lớn hơn không", 400);
             if ($product->amount < $this->quantity)
                 throw new Exception("Sản không đủ", 400);
             $cart = Cart::where('user', 1)->where('product', $this->product['id']);
