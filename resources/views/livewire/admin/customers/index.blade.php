@@ -53,6 +53,11 @@
                         <td scope="col"
                             class="text-center align-middle d-flex justify-content-center align-items-center"
                             style="height: 85px;padding:0px">
+                            <li class="list-inline-item icon-plus">
+                                <button class="btn btn-success btn-sm rounded-0" type="button"
+                                    wire:click="removeUser({{ $item['id'] }})" data-toggle="tooltip"
+                                    data-placement="top" title="Delete"><i class="fa fa-plus"></i> Thêm quyền</button>
+                            </li>
                             <li class="list-inline-item icon-trash">
                                 <button class="btn btn-danger btn-sm rounded-0" type="button"
                                     wire:click="removeUser({{ $item['id'] }})" data-toggle="tooltip"

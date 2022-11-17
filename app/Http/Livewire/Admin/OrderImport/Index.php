@@ -1,17 +1,15 @@
 <?php
 
-namespace App\Http\Livewire\Admin\Orders;
+namespace App\Http\Livewire\Admin\OrderImport;
 
-use App\Exports\OrderDetailExport;
+use App\Exports\OrderImportExport;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Product;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
-use PhpParser\Node\Expr\FuncCall;
 use Throwable;
 
 class Index extends Component
@@ -20,59 +18,25 @@ class Index extends Component
     public $searchFromDate;
     public $searchToDate;
     public $searchName;
-    public $status;
-    protected $paginationTheme = 'bootstrap';
+    public $listorders;
     public $perPage;
-    public $check = 0;
-    protected $listeners = ['changestatus' => 'changeStatus'];
-    public function updatingSearchFromDate()
-    {
-        $this->resetPage();
-    }
-    public function updatingSearchToDate()
-    {
-        $this->resetPage();
-    }
-    public function updatingSearchName()
-    {
-        $this->resetPage();
-    }
-    public function updatingStatus()
-    {
-        $this->resetPage();
-    }
-    public function changeStatus($data)
-    {
-        try {
-            Order::where('id', $data[0])->update([
-                'status' => $data[1]
-            ]);
-            $this->dispatchBrowserEvent('show-toast', ['type' => 'success', 'message' => 'Cập nhật thành công']);
-        } catch (Throwable $e) {
-            $this->dispatchBrowserEvent('show-toast', ['type' => 'error', 'message' => 'Cập nhật thất bại']);
-        }
-    }
+    protected $paginationTheme = 'bootstrap';
     public function mount()
     {
-        $this->perPage = 4;
+        $this->perPage = 2;
+        $this->listorders = Order::where('type', 2)->get()->toArray();
     }
     public function render()
     {
-
         $query = $this->getQuery();
         $orders = $query->paginate($this->perPage);
-        // dd($orders);
-        return view('livewire.admin.orders.index', ['orders' => $orders]);
+        return view('livewire.admin.order-import.index', ['orders' => $orders]);
     }
-
     public function getQuery()
     {
-        $query = Order::query()->with('UserOrder')->where('type', 1);
+        $query = Order::query()->where('type', 2)->where('type', 2);
         if ($this->searchName) {
             $query->where('order.name', 'like', '%' . trim($this->searchName) . '%');
-        }
-        if ($this->status) {
-            $query->where('status', $this->status);
         }
         if ($this->searchFromDate) {
             $query->whereDate('created_at', '>=', $this->searchFromDate);
@@ -82,16 +46,9 @@ class Index extends Component
         }
         return $query;
     }
-    public function resetData()
-    {
-        $this->searchFromDate = null;
-        $this->searchToDate = null;
-        $this->searchName = '';
-        $this->status = 0;
-    }
     public function Export($id)
     {
-        $order = Order::where('order.id', $id)->join('users', 'users.id', 'order.user');
+        $order = Order::where('order.id', $id)->join('vendor', 'vendor.id', 'order.user');
         $data = $order->join('orderdetail', 'orderdetail.order_id', 'order.id')
             ->join('product', 'product.id', 'orderdetail.product_id')
             ->select(
@@ -104,14 +61,13 @@ class Index extends Component
             )
             ->get();
         $info = $order->select(
-            DB::raw('users.name as username,users.address as address,order.totalPrice as price,order.discount')
+            DB::raw('vendor.vendor_name as vendorname,vendor.vendor_address as address,order.totalPrice as price')
         )->first()->toArray();
         // dd($data, $info);
-        return Excel::download(new OrderDetailExport(
-            $info['username'],
+        return Excel::download(new OrderImportExport(
+            $info['vendorname'],
             $info['address'],
             $info['price'],
-            $info['discount'],
             $data
         ), 'HoaDon' . date('Y-m-d-His') . '.xlsx');
     }
@@ -121,13 +77,12 @@ class Index extends Component
             DB::beginTransaction();
             $order = Order::where('id', $id);
             $dataorder = $order->first();
-            if ($dataorder->status < 3) {
-                $orderdetail = OrderDetail::where('order_id', $dataorder->id)->get()->toArray();
-                foreach ($orderdetail as $item) {
-                    $product = Product::where('id', $item['product_id'])->first();
-                    $product->amount = $product->amount + $item['quantity'];
-                    $product->save();
-                }
+            $orderdetail = OrderDetail::where('order_id', $dataorder->id)->get()->toArray();
+            foreach ($orderdetail as $item) {
+                $product = Product::where('id', $item['product_id'])->first();
+                $count = $product->amount - $item['quantity'];
+                $product->amount = $count < 0 ? 0 : $count;
+                $product->save();
             }
             OrderDetail::where('order_id', $dataorder->id)->delete();
             $order->delete();

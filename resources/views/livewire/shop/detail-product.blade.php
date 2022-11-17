@@ -101,7 +101,7 @@
                             <div class="tab-content">
                                 <div class="tab-pane active" id="tabs-5" role="tabpanel">
                                     <div class="product__details__tab__content">
-                                        <p class="note">Mô Tả Sản Pha</p>
+                                        <p class="note">Description</p>
                                         <div class="product__details__tab__content__item">
                                             <h5>Products Infomation</h5>
                                             <p>{{ $product['description'] }}</p>

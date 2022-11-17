@@ -19,7 +19,7 @@ class Index extends Component
     public $perPage;
     public function mount()
     {
-        $this->perPage = 5;
+        $this->perPage = 4;
     }
     public function render()
     {
@@ -29,7 +29,8 @@ class Index extends Component
     }
     public function getQuery()
     {
-        $query = User::query()->with('Img');
+        $query = User::query()->with('Img')
+            ->join('model_has_permissions', 'model_has_permissions.model_id', 'users.id')->where('permission_id', 2);
         if ($this->searchName) {
             $query->where(
                 'name',
@@ -57,6 +58,8 @@ class Index extends Component
         DB::beginTransaction();
         try {
             User::where('id', $id)->delete();
+            DB::table('model_has_permissions')->where('model_id', $id)->delete();
+            DB::table('model_has_roles')->where('model_id', $id)->delete();
             DB::commit();
             $this->dispatchBrowserEvent('show-toast', ['type' => 'success', 'message' => 'Xóa thành công']);
             return;

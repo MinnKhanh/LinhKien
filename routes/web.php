@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\OrderImport;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\StatisticalController;
 use App\Http\Controllers\Admin\VendorController;
@@ -124,6 +125,16 @@ Route::group([
         Route::get('/', [CustomerController::class, 'index'])->name('index');
         Route::get('/detail', [OrderController::class, 'detailOrder'])->name('detail');
         Route::get('/sendmail', [OrderController::class, 'sendOrderToMail'])->name('sendmail');
+    });
+    Route::group([
+        'as'     => 'orderimport.',
+        'prefix' => 'orderimport',
+    ], static function () {
+        Route::get('/', [OrderImport::class, 'index'])->name('index');
+        Route::get('/create', [OrderImport::class, 'create'])->name('create');
+        Route::get('/detail', [OrderImport::class, 'detail'])->name('detail');
+        Route::get('/checkout', [OrderImport::class, 'checkout'])->name('checkout');
+        Route::get('/printorder', [OrderImport::class, 'printorder'])->name('printorder');
     });
 });
 Route::get('/test', function () {

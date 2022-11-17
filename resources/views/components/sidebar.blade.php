@@ -83,9 +83,26 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#type" role="button" aria-expanded="false"
+                aria-controls="type">
+                <i class="fa-solid fa-receipt menu-icon"></i>
+                <span class="menu-title">Nhập hàng</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="type">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.orderimport.index') }}">Danh sách
+                            hóa đơn nhập</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.orderimport.create') }}">Tạo
+                            hóa
+                            đơn nhập</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="{{ route('admin.customers.index') }}">
                 <i class="mdi mdi-account menu-icon"></i>
-                <span class="menu-title">Khách hàng</span>
+                <span class="menu-title">Người dùng</span>
             </a>
         </li>
         <li class="nav-item">
@@ -98,6 +115,18 @@
             <a class="nav-link" href="#">
                 <i class="fa-solid fa-newspaper menu-icon"></i>
                 <span class="menu-title">Tin tức</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="fa-solid fa-carousel menu-icon"></i>
+                <span class="menu-title">Slide intro</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="fa-solid fa-newspaper menu-icon"></i>
+                <span class="menu-title">discount</span>
             </a>
         </li>
         <li class="nav-item">
