@@ -4,45 +4,35 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="p-3">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-center mb-3">
+                        <a class="mr-auto btn btn-secondary text-white" href="{{ route('admin.orders.index') }}">Quay
+                            lại</a>
                         <h4>
-                            Chi tiết đơn hàng - <span class="fw-bold">
+                            Đơn hàng {{ '(' }}<span class="">
                                 {{ $order['status'] == 1 ? 'Đang sử lý' : ($order['status'] == 2 ? 'Đang giao' : ($order['status'] == 3 ? 'Đã nhận' : 'Bị hoàn lại')) }}
-                            </span>
+                            </span>{{ ')' }}
                         </h4>
-                        <div>
-                            <a href="{{ route('admin.orders.index') }}" class="btn btn-primary text-white">Quay lại</a>
-                            <a href="{{ route('admin.orders.prictorder', ['id' => $idorder]) }}" class="btn btn-success"
-                                wire:click='print'>In
-                                hóa đơn</a>
-                            <button type="button" class="btn btn-info" id="sendmail" data-id={{ $idorder }}>Gửi
-                                mail</button>
-                            {{-- href="{{ route('admin.orders.sendmail', ['id' => $idorder]) }}" --}}
-                        </div>
+
                     </div>
 
                     <div class="row my-3">
-                        <div class="col-4">
-                            <div class="card bg-light p-2">
-                                <h5 class="border-bottom">Thông tin người nhận</h5>
+                        <div class="col-12">
+                            <div class=" p-2">
+                                <h4 class="border-bottom mb-3">Thông tin người nhận</h4>
                                 <p class="fw-bold">Tên khách hàng: {{ $order['username'] }}</p>
                                 <p>Địa chỉ:
                                     {{ $order['address'] . '-' . $order['district'] . '-' . $order['city'] }}
                                 </p>
                                 <p>Điện thoại: {{ $order['phone'] }}</p>
                             </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="card bg-light p-2">
-                                <h5 class="border-bottom">Hình thức giao hàng</h5>
+                            <div class=" p-2">
+                                <h4 class="border-bottom mb-3">Hình thức giao hàng</h4>
                                 <p>Giao trước: {{ $date }}</p>
                                 <p>Đơn vị vẩn chuyển: <span class="fw-bold">Express</span></p>
                                 <p>Phí vận chuyển: {{ number_format($order['ship'] + 20000) }}Đ</p>
                             </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="card bg-light p-2">
-                                <h5 class="border-bottom">Hình thức thanh toán</h5>
+                            <div class=" p-2">
+                                <h4 class="border-bottom mb-3">Hình thức thanh toán</h4>
                                 <p>Phương thức:
                                     {{ $order['paymentmethod'] === 1 ? 'Thanh toán Online' : 'Thanh toán khi nhận hàng' }}
                                 </p>
@@ -52,9 +42,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card">
+                    <h3 class="mb-2">Danh sách sản phẩm</h3>
+                    <div class="row p-2">
                         <div class="table-responsive text-center">
-                            <table class="table table-striped table-hover table-bordered">
+                            <table class="table table-hover">
                                 <thead>
                                     <tr>
                                         <th scope="col">STT</th>
@@ -98,19 +89,32 @@
                                     @endforelse
                                     <td colspan="6" class="text-end">
                                         <h6>
-                                            Tổng: <span class="fw-bold">{{ number_format($order['totalPrice']) }}</span>Đ
+                                            Tổng: <span class="">{{ number_format($order['totalPrice']) }}</span>Đ
                                         </h6>
                                         <h6>
-                                            Discont: <span class="fw-bold">{{ number_format($order['discount']) }}</span>Đ
+                                            Discont: <span class="">{{ number_format($order['discount']) }}</span>Đ
                                         </h6>
                                     </td>
                                 </tbody>
                             </table>
                         </div>
-                        <h4 class="mt-2 ml-2 mb-2">
-                            Tổng cộng: <span
-                                class="text-danger fw-bold">{{ number_format($order['totalPrice'] + $order['ship']) }}</span>Đ
-                        </h4>
+                        <div class="mt-2 ml-2 mb-2 d-flex justify-content-between">
+                            <h4>
+                                Giá hóa đơn: <span
+                                    class="">{{ number_format($order['totalPrice'] + $order['ship']) }}</span>Đ
+                            </h4>
+                            <div>
+
+                                <a href="{{ route('admin.orders.prictorder', ['id' => $idorder]) }}"
+                                    class="btn btn-success" wire:click='print'>In
+                                    hóa đơn</a>
+                                <button type="button" class="btn btn-warning" id="sendmail"
+                                    data-id={{ $idorder }}>Gửi
+                                    mail</button>
+                                {{-- href="{{ route('admin.orders.sendmail', ['id' => $idorder]) }}" --}}
+                            </div>
+                        </div>
+
                     </div>
 
                     {{-- @if ($order->status == 'Đã giao' || $order->status == 'Đã hủy' || $order->status == 'Giao hàng thất bại')
