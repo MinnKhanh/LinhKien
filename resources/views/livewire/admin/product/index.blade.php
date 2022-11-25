@@ -3,6 +3,7 @@
         <thead class="thead-dark">
             <tr>
                 <th scope="col" class="text-center">#</th>
+                <th scope="col" class="text-center">Code</th>
                 <th scope="col" class="text-center">Image</th>
                 <th scope="col" class="text-center">Name</th>
                 <th scope="col" class="text-center">Brand</th>
@@ -23,6 +24,7 @@
                 @endphp --}}
                 <tr>
                     <th scope="col" class="text-center align-middle ">{{ $index++ }}</th>
+                    <th scope="col" class="text-center align-middle ">{{ $item['code'] }}</th>
                     <th scope="col" class="text-center align-middle "> <img
                             src="{{ asset('storage/product/' . (isset($item['img'][0]) ? $item['img'][0]['image_name'] : '')) }}"
                             style="max-width: 20%;" alt=""></th>

@@ -83,13 +83,13 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#type" role="button" aria-expanded="false"
-                aria-controls="type">
+            <a class="nav-link" data-toggle="collapse" href="#import" role="button" aria-expanded="false"
+                aria-controls="import">
                 <i class="fa-solid fa-receipt menu-icon"></i>
                 <span class="menu-title">Nhập hàng</span>
                 <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="type">
+            <div class="collapse" id="import">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.orderimport.index') }}">Danh sách
                             hóa đơn nhập</a></li>
@@ -99,11 +99,27 @@
                 </ul>
             </div>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a class="nav-link" href="{{ route('admin.customers.index') }}">
                 <i class="mdi mdi-account menu-icon"></i>
                 <span class="menu-title">Người dùng</span>
             </a>
+        </li> --}}
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#user" role="button" aria-expanded="false"
+                aria-controls="type">
+                <i class="mdi mdi-account menu-icon"></i>
+                <span class="menu-title">Người dùng</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="user">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.customers.index') }}">Danh
+                            sách người dùng</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.customers.create') }}">Tạo
+                            tài khoản</a></li>
+                </ul>
+            </div>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('admin.statistical.index') }}">

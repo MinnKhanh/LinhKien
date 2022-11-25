@@ -29,6 +29,7 @@ class Createorupdate extends Component
     public $status;
     public $photos;
     public $listimg;
+    public $code;
     public function mount()
     {
         if ($this->isedit) {
@@ -43,6 +44,7 @@ class Createorupdate extends Component
             $this->status = $product['status'] ? true : false;
             $this->trend = $product['trend'] ? true : false;
             $this->listimg = $product['img'];
+            $this->code = $product['code'];
             // dd($this->listimg);
         }
         $this->listcategories = Categories::pluck('category_name', 'id');
@@ -65,7 +67,8 @@ class Createorupdate extends Component
             'quantity' => 'required|numeric',
             'brand' => 'required',
             'description' => 'required',
-            'photos.*' => $this->isedit ? '' : 'required|file|mimes:jpeg,jpg,png,gif'
+            'photos.*' => $this->isedit ? '' : 'required|file|mimes:jpeg,jpg,png,gif',
+            'code' => 'required|unique:product,code',
         ]);
         try {
             DB::beginTransaction();
@@ -81,6 +84,7 @@ class Createorupdate extends Component
             $product->amount = $this->quantity;
             $product->description = $this->description;
             $product->status = $this->status ? $this->status : 0;
+            $product->code = $this->code;
             $product->trend = $this->trend ? $this->trend : 0;
             $product->save();
             if ($this->photos) {

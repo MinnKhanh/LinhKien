@@ -11,4 +11,12 @@ class CustomerController extends Controller
     {
         return view('admin.customers.index');
     }
+    public function edit(Request $request)
+    {
+        return view('admin.customers.edit', ['id' => $request->id]);
+    }
+    public function create(Request $request)
+    {
+        return view('admin.customers.create');
+    }
 }

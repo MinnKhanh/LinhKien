@@ -9,14 +9,17 @@ use App\Http\Controllers\Admin\OrderImport;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\StatisticalController;
 use App\Http\Controllers\Admin\VendorController;
+use App\Http\Controllers\Auth\ChangePassword;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController as ControllersOrderController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\Shop;
 use App\Http\Controllers\UserController;
 use App\Models\OrderDetail;
+use App\Models\RoleHasPermisson;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,7 +60,9 @@ Route::group([
     Route::get('/contact', [ServiceController::class, 'contact'])->name('contact');
 });
 Route::get('/test', function () {
-    return view('test');
+    $user = User::where('id', 3)->first();
+    dd($user->getAllPermissions()[0]->id);
+    // $this->dispatchBrowserEvent('show-toast', ['type' => 'success', 'message' => 'Cập nhật thành công']);
 });
 Route::group([
     'as'     => 'admin.',
@@ -123,8 +128,10 @@ Route::group([
         'prefix' => 'customers',
     ], static function () {
         Route::get('/', [CustomerController::class, 'index'])->name('index');
-        Route::get('/detail', [OrderController::class, 'detailOrder'])->name('detail');
-        Route::get('/sendmail', [OrderController::class, 'sendOrderToMail'])->name('sendmail');
+        Route::get('/edit', [CustomerController::class, 'edit'])->name('edit');
+        Route::get('/create', [CustomerController::class, 'create'])->name('create');
+        // Route::get('/detail', [OrderController::class, 'detailOrder'])->name('detail');
+        // Route::get('/sendmail', [OrderController::class, 'sendOrderToMail'])->name('sendmail');
     });
     Route::group([
         'as'     => 'orderimport.',
@@ -137,9 +144,9 @@ Route::group([
         Route::get('/printorder', [OrderImport::class, 'printorder'])->name('printorder');
     });
 });
-Route::get('/test', function () {
-    dd(OrderDetail::where('order_id', 1)->get()->toArray());
-})->name('detail');
+// Route::get('/test', function () {
+//     dd(OrderDetail::where('order_id', 1)->get()->toArray());
+// })->name('detail');
 Route::group([
     'as'     => 'order.',
     'prefix' => 'order',
@@ -155,4 +162,6 @@ Route::group([
     Route::get('/', [UserController::class, 'index'])->name('index');
     Route::get('/update', [UserController::class, 'update'])->name('update');
     Route::get('/favorite', [UserController::class, 'productFavorite'])->name('favorite')->middleware('auth');
+    Route::get('/changepassword', [UserController::class, 'changePassword'])->name('viewchangepassword')->middleware('auth');
+    Route::post('/changepassword', [UserController::class, 'updatePassword'])->name('changepassword')->middleware('auth');
 });

@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Admin\Customers;
 
+use App\Models\Role;
+use App\Models\RoleHasPermisson;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -14,12 +16,16 @@ class Index extends Component
     public $searchName;
     public $searchPhone;
     public $searchEmail;
+    public $permission = 2;
     protected $paginationTheme = 'bootstrap';
     public $searchCreateDate;
     public $perPage;
+    public $rolesUser;
+    protected $listeners = ['changeRole' => 'changeRole'];
     public function mount()
     {
         $this->perPage = 4;
+        $this->roles = Role::pluck('name', 'id')->toArray();
     }
     public function render()
     {
@@ -27,10 +33,19 @@ class Index extends Component
         $customers = $customers->paginate($this->perPage);
         return view('livewire.admin.customers.index', ['customers' => $customers]);
     }
+    public function changeRole($data)
+    {
+        // dd($data);
+        $user = User::where('id', $data[1])->first();
+        $user->syncRoles($data[0]);
+        $rolePermissions = RoleHasPermisson::whereIn('role_id', [$data[0]])->get()->pluck('permission_id')->unique()->toArray();
+        $user->permissions()->sync($rolePermissions);
+        $this->dispatchBrowserEvent('show-toast', ['type' => 'success', 'message' => 'Cập nhật thành công']);
+    }
     public function getQuery()
     {
         $query = User::query()->with('Img')
-            ->join('model_has_permissions', 'model_has_permissions.model_id', 'users.id')->where('permission_id', 2);
+            ->join('model_has_permissions', 'model_has_permissions.model_id', 'users.id')->where('permission_id', $this->permission);
         if ($this->searchName) {
             $query->where(
                 'name',

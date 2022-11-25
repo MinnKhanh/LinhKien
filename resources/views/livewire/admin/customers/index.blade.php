@@ -17,6 +17,16 @@
             <input type="date" class="end form-control ml-1" style="height: 35px" wire:model="searchCreateDate"
                 class="">
         </div>
+        <div class="mr-3">
+            <label for="" class="d-block">Quyền</label>
+            <select class="custom-select" wire:model="permission">
+                @forelse ($roles as $key=>$itemrole)
+                    <option value={{ $key }}>
+                        {{ $itemrole }}</option>
+                @empty
+                @endforelse
+            </select>
+        </div>
     </div>
     <div class="container-fluid" style="overflow-x: scroll;">
         <table class="table w-100">
@@ -29,6 +39,7 @@
                     <th scope="col" class="text-center">Thành phố</th>
                     <th scope="col" class="text-center">Quận/Huyện</th>
                     <th scope="col" class="text-center">Ngày tạo</th>
+                    <th scope="col" class="text-center">Quyền</th>
                     <th scope="col" class="fix text-center">Tool</th>
                 </tr>
             </thead>
@@ -50,13 +61,25 @@
                             {{ !$item['district'] ? 'Trống' : $item['district'] }}</td>
                         <td scope="col" class="text-center align-middle ">{{ $item['created_at']->format('d/m/Y') }}
                         </td>
+                        <td scope="col" class="text-center align-middle ">
+                            @php
+                                $user = App\Models\User::where('id', $item['id'])->first();
+                            @endphp
+                            <select class="form-control roles" data-user={{ $item['id'] }}>
+                                @forelse ($roles as $key=>$itemrole)
+                                    <option {{ $user->can($itemrole) ? 'selected' : '' }} value={{ $key }}>
+                                        {{ $itemrole }}</option>
+                                @empty
+                                @endforelse
+                            </select>
+                        </td>
                         <td scope="col"
                             class="text-center align-middle d-flex justify-content-center align-items-center"
                             style="height: 85px;padding:0px">
                             <li class="list-inline-item icon-plus">
-                                <button class="btn btn-success btn-sm rounded-0" type="button"
-                                    wire:click="removeUser({{ $item['id'] }})" data-toggle="tooltip"
-                                    data-placement="top" title="Delete"><i class="fa fa-plus"></i> Thêm quyền</button>
+                                <a class="btn btn-warning btn-sm rounded-0"
+                                    href="{{ route('admin.customers.edit', ['id' => $item['id']]) }}"><i
+                                        class="fa fa-pencil"></i></a>
                             </li>
                             <li class="list-inline-item icon-trash">
                                 <button class="btn btn-danger btn-sm rounded-0" type="button"
@@ -79,3 +102,19 @@
         </div>
     </div>
 </div>
+@push('js')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            $(document).on('change', '.roles', function() {
+                console.log('cos chay nah')
+                let role = parseInt($(this).val());
+                let userid = parseInt($(this).attr('data-user'));
+                console.log(role, userid)
+                window.livewire.emit('changeRole', {
+                    0: role,
+                    1: userid
+                });
+            })
+        })
+    </script>
+@endpush

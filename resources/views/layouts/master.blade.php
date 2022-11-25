@@ -177,21 +177,22 @@
                         <div class="header__top__right">
                             <div class="header__top__links">
                                 @if (auth()->check())
-                                    <a href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        Đăng xuất
-                                    </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                        class="d-none">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
                                     @if (Auth::user()->can('Admin'))
                                         <a href="{{ route('admin.main.index') }}">Quản lý</a>
                                     @endif
-                                    {{-- <a href="{{ route('password.confirm') }}">Đổi mật khẩu</a> --}}
                                     <a href="{{ route('user.update') }}">Cập nhật</a>
+                                    <a href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        Đăng xuất
+                                    </a>
+                                    <a href="{{ route('user.changepassword') }}">Đổi mật khẩu</a>
+
+                                    {{-- <a href="{{ route('password.confirm') }}">Đổi mật khẩu</a> --}}
                                 @else
                                     <a href="{{ route('login') }}">Đăng nhập</a>
                                 @endif

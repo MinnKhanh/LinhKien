@@ -18,7 +18,8 @@ class Product extends Model
         'description',
         'brand',
         'vendor',
-        'trend'
+        'trend',
+        'code'
     ];
     public function Img()
     {

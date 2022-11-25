@@ -206,7 +206,42 @@
         </div>
     </section>
     <!-- Categories Section End -->
+    {{-- <div class="container-fluid pt-5 pb-3">
+        <div class="row px-xl-5">
+            @forelse ($discountshow as $item)
+                <div class="col-md-6">
+                    <div class="product-offer mb-30" style="height: 300px;">
+                        <img class="img-fluid" src="{{ asset('storage') }}" alt="">
+                        <div class="offer-text">
+                            <h6 class="text-white text-uppercase">Tiết Kiệm
+                                100.000
+                                {{ number_format($item['persent'], 0, ',', ',') }}{{ $item['unit'] == 1 ? '%' : 'Đ' }}
+                            </h6>
+                            <h3 class="text-white mb-3"></h3>
+                            <a href="" class="btn btn-primary" type="button" data-toggle="modal"
+                                data-target="#discount_">Mua Ngay</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="product-offer mb-30" style="height: 300px;">
+                        <img class="img-fluid" src="{{ asset('storage') }}" alt="">
+                        <div class="offer-text">
+                            <h6 class="text-white text-uppercase">Tiết Kiệm
+                                100.000
+                                {{ number_format($item['persent'], 0, ',', ',') }}{{ $item['unit'] == 1 ? '%' : 'Đ' }}
+                            </h6>
+                            <h3 class="text-white mb-3"></h3>
+                            <a href="" class="btn btn-primary" type="button" data-toggle="modal"
+                                data-target="#discount_">Mua Ngay</a>
+                        </div>
+                    </div>
+                </div>
+            @empty
+            @endforelse
 
+        </div>
+    </div> --}}
     <!-- Instagram Section Begin -->
     <section class="instagram spad">
         <div class="container">

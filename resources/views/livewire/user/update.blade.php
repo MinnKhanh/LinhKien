@@ -42,10 +42,10 @@
 @endpush
 <div class="container">
     <div wire:loading class="loader" style="z-index: 1"></div>
+    <h4 class="co-6 checkout__input mt-4 mb-3"> Thông Tin</h4>
+    <a href="{{ route('user.changepassword') }}" class="btn btn-primary">Đổi mật khẩu</a>
     <form class="row">
         @csrf
-        <h4 class="co-6 checkout__input mb-5 border-bottom"> Thông Tin
-        </h4>
         <div class="col-12 form-row">
             <div class="col-6">
                 <div class="checkout__input">

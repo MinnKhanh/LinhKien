@@ -46,7 +46,18 @@
         @csrf
         <h4 class="co-6 checkout__input mb-5 border-bottom"> {{ isset($isedit) ? 'Update Product' : 'New Product' }}</h4>
         <div class="col-12 form-row">
-            <div class="col-6">
+            <div class="col-4">
+                <div class="checkout__input">
+                    <p>Mã<span>*</span></p>
+                    <input type="text" wire:model.defer="code">
+                    <p class="error">
+                        @error('code')
+                            <strong>{{ $message }}</strong>
+                        @enderror
+                    </p>
+                </div>
+            </div>
+            <div class="col-4">
                 <div class="checkout__input">
                     <p>Tên<span>*</span></p>
                     <input type="text" wire:model.defer="name">
@@ -57,7 +68,7 @@
                     </p>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-4">
                 <div class="checkout__input">
                     <p>Thể Loại<span>*</span></p>
                     <select type="text" wire:model.defer="category" id="category" class="select2-box">
