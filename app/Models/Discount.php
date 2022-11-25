@@ -17,6 +17,12 @@ class Discount extends Model
         'end',
         'unit',
         'name',
+        'description',
+        'relation_id'
     ];
     public $timestamps = false;
+    public function Img()
+    {
+        return $this->morphMany(Img::class, 'product_id', 'image_type');
+    }
 }

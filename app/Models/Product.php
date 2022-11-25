@@ -25,4 +25,8 @@ class Product extends Model
     {
         return $this->morphMany(Img::class, 'product_id', 'image_type');
     }
+    public function Discount()
+    {
+        return $this->hasMany(Discount::class, 'relation_id', 'id');
+    }
 }

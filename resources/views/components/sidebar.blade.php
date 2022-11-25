@@ -140,10 +140,20 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fa-solid fa-newspaper menu-icon"></i>
+            <a class="nav-link" data-toggle="collapse" href="#discount" role="button" aria-expanded="false"
+                aria-controls="discount">
+                <i class="mdi mdi-account menu-icon"></i>
                 <span class="menu-title">discount</span>
+                <i class="menu-arrow"></i>
             </a>
+            <div class="collapse" id="discount">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.discount.index') }}">Danh
+                            sách khuyến mãi</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.discount.create') }}">Tạo
+                            phiếu khuyến mãi</a></li>
+                </ul>
+            </div>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">

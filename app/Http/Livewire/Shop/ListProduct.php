@@ -32,8 +32,8 @@ class ListProduct extends Component
     }
     public function render()
     {
-        $products = Product::with('Img')->where('status', 1);
-
+        $products = Product::with(['Img', 'Discount' => fn ($query) =>
+        $query->where('apply', 1)->whereDate('Discount.begin', '<=', date('Y-m-d'))->whereDate('Discount.end', '>=', date('Y-m-d'))])->where('status', 1);
         if ($this->category)
             $products->where('category_id', $this->category);
         if ($this->nameSearch)
@@ -56,6 +56,7 @@ class ListProduct extends Component
         //     dd($products);
         // }
         $products = $products->paginate(6);
+
         return view('livewire.shop.list-product', ['categories' => $categoies, 'products' => $products, 'brands' => $brands]);
     }
     public function addToCart($user_id = null, $product_id = null, $quantity = null, $price_product = null, $name = null)

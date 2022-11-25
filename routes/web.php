@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\OrderImport;
 use App\Http\Controllers\Admin\ProductController;
@@ -16,10 +17,12 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\Shop;
 use App\Http\Controllers\UserController;
 use App\Models\OrderDetail;
+use App\Models\Product;
 use App\Models\RoleHasPermisson;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,8 +63,10 @@ Route::group([
     Route::get('/contact', [ServiceController::class, 'contact'])->name('contact');
 });
 Route::get('/test', function () {
-    $user = User::where('id', 3)->first();
-    dd($user->getAllPermissions()[0]->id);
+    DB::enableQueryLog();
+    $products = Product::with(['Img', 'Discount' => fn ($query) => $query->where('apply', 1)->whereDate('Discount.begin', '<=', date('Y-m-d'))->whereDate('Discount.end', '>=', date('Y-m-d'))])->get()->toArray();
+    dd($products);
+    // dd(DB::getQueryLog());
     // $this->dispatchBrowserEvent('show-toast', ['type' => 'success', 'message' => 'Cập nhật thành công']);
 });
 Route::group([
@@ -142,6 +147,16 @@ Route::group([
         Route::get('/detail', [OrderImport::class, 'detail'])->name('detail');
         Route::get('/checkout', [OrderImport::class, 'checkout'])->name('checkout');
         Route::get('/printorder', [OrderImport::class, 'printorder'])->name('printorder');
+    });
+    Route::group([
+        'as'     => 'discount.',
+        'prefix' => 'discount',
+    ], static function () {
+        Route::get('/', [DiscountController::class, 'index'])->name('index');
+        Route::get('/edit', [DiscountController::class, 'edit'])->name('edit');
+        Route::get('/create', [DiscountController::class, 'create'])->name('create');
+        // Route::get('/detail', [OrderController::class, 'detailOrder'])->name('detail');
+        // Route::get('/sendmail', [OrderController::class, 'sendOrderToMail'])->name('sendmail');
     });
 });
 // Route::get('/test', function () {

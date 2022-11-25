@@ -200,6 +200,13 @@
                         @forelse ($products as $item)
                             <div wire:key="itemproduct-{{ $item['id'] }}" class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="product__item">
+                                    @if (count($item['Discount']) > 0)
+                                        <div
+                                            style="position: absolute;background: #ff0000a8;top: 0px;left: 21px;z-index: 1;padding: 10px 2px;">
+                                            {{ number_format($item['Discount'][0]['percent'], 0, ',', ',') }}{{ $item['Discount'][0]['unit'] == 1 ? '%' : 'Đ' }}
+                                        </div>
+                                    @endif
+                                    <div></div>
                                     <div class="product__item__pic set-bg"
                                         style='background-image: url("{{ asset('storage/product/' . $item['img'][0]['image_name']) }}");'
                                         data-setbg="{{ asset('storage/product/' . $item['img'][0]['image_name']) }}">

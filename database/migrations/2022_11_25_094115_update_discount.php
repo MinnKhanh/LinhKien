@@ -14,7 +14,7 @@ class UpdateDiscount extends Migration
     public function up()
     {
         Schema::table('discount', function (Blueprint $table) {
-            $table->string('discription')->nullable();
+            $table->string('description')->nullable();
             $table->integer('relation_id')->nullable();
         });
     }

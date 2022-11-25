@@ -67,7 +67,7 @@
                             </div>
                             <div class="checkout__input">
                                 <p>City<span>*</span></p>
-                                <input type="text" style="color:black !important;" wire:model.defer="city">
+                                <input type="text" style="color:black !important;" wire:model="city">
                                 <p class="error">
                                     @error('city')
                                         <strong>{{ $message }}</strong>
@@ -127,18 +127,44 @@
                                         $index = 0;
                                     @endphp
                                     @foreach ($carts as $item)
+                                        @php
+                                            $price = $item['price'];
+                                            if (count($item['discount'])) {
+                                                if ($item['discount'][0]['unit'] == 1) {
+                                                    $price = $item['price'] * (1 - $item['discount'][0]['percent'] / 100);
+                                                } else {
+                                                    $price = $item['price'] - $item['discount'][0]['percent'];
+                                                }
+                                            }
+                                        @endphp
                                         <li>{{ ++$index }}. {{ $item['product_name'] }}
                                             <p>Giá:
-                                                {{ number_format($item['price'] * $item['quantity'], 0, ',', ',') }}
+                                                {{ number_format($price * $item['quantity'], 0, ',', ',') }}
                                                 Đ | Số lượng:{{ $item['quantity'] }}</p>
                                         </li>
                                     @endforeach
                                 </ul>
+                                <div class="checkout__total__products">
+                                    <h6 class="mb-3">Discount</h6>
+                                    <form>
+                                        <select class="form-control use w-100" type="text"
+                                            wire:change="applyDiscount" wire:model="discount">
+                                            <option>--Chọn--</option>
+                                            @foreach ($discounts as $item)
+                                                <option value={{ $item['code'] }}>{{ $item['name'] }}</option>
+                                            @endforeach
+                                        </select>
+                                        {{-- <button type="submit" wire:click.prevent="addDiscount">Apply</button> --}}
+                                    </form>
+                                </div>
                                 <ul class="checkout__total__all">
                                     <li>Subtotal <span>{{ number_format($totalPrice, 0, ',', ',') }} Đ</span></li>
                                     <li>Discount <span>{{ number_format($discountprice, 0, ',', ',') }} Đ</span></li>
-                                    <li>Total <span>{{ number_format($totalPrice - $discountprice, 0, ',', ',') }}
-                                            Đ</span></li>
+                                    <li>Ship <span>{{ number_format($ship, 0, ',', ',') }} Đ</span></li>
+                                    <li>Total
+                                        <span>{{ number_format($totalPrice - $discountprice + $ship, 0, ',', ',') }}
+                                            Đ</span>
+                                    </li>
                                 </ul>
                                 <div class="checkout__input__checkbox">
                                     <label for="payment">

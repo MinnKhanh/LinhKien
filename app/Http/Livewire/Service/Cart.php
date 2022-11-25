@@ -24,7 +24,8 @@ class Cart extends Component
     }
     public function render()
     {
-        $this->carts = Product::with("Img")->join('cart', 'cart.product', 'product.id')->where('user', auth()->user()->id)->get()->toArray();
+        $this->carts = Product::with(["Img", 'Discount' => fn ($query) =>
+        $query->where('apply', 1)->whereDate('Discount.begin', '<=', date('Y-m-d'))->whereDate('Discount.end', '>=', date('Y-m-d'))])->join('cart', 'cart.product', 'product.id')->where('user', auth()->user()->id)->get()->toArray();
         $this->data = Product::with("Img")->join('cart', 'cart.product', 'product.id')->where('user', auth()->user()->id)->pluck('quantity', 'id')->toArray();
         return view('livewire.service.cart');
     }

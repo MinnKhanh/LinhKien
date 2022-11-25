@@ -44,9 +44,6 @@
                                     $totalPrice = 0;
                                 @endphp
                                 @forelse ($carts as $item)
-                                    @php
-                                        $totalPrice += $item['price'] * $item['quantity'];
-                                    @endphp
                                     <tr>
                                         <td class="product__cart__item">
                                             <div class="product__cart__item__pic">
@@ -56,7 +53,17 @@
                                             </div>
                                             <div class="product__cart__item__text">
                                                 <h6>{{ $item['product_name'] }}</h6>
-                                                <h5>{{ number_format($item['price'], 0, ',', ',') }} Đ</h5>
+                                                @php
+                                                    $price = $item['price'];
+                                                    if (count($item['discount'])) {
+                                                        if ($item['discount'][0]['unit'] == 1) {
+                                                            $price = $item['price'] * (1 - $item['discount'][0]['percent'] / 100);
+                                                        } else {
+                                                            $price = $item['price'] - $item['discount'][0]['percent'];
+                                                        }
+                                                    }
+                                                @endphp
+                                                <h5>{{ number_format($price, 0, ',', ',') }} Đ</h5>
                                             </div>
                                         </td>
                                         <td class="quantity__item">
@@ -69,10 +76,13 @@
                                             </div>
                                         </td>
                                         <td class="cart__price">
-                                            {{ number_format($item['price'] * $item['quantity'], 0, ',', ',') }} Đ</td>
+                                            {{ number_format($price * $item['quantity'], 0, ',', ',') }} Đ</td>
                                         <td class="cart__close"><i class="fa fa-close"
                                                 wire:click="changeCart([{{ $item['id'] }},0])"></i></td>
                                     </tr>
+                                    @php
+                                        $totalPrice += $price * $item['quantity'];
+                                    @endphp
                                 @empty
                                 @endforelse
 
@@ -88,18 +98,17 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="cart__discount">
+                    {{-- <div class="cart__discount">
                         <h6>Discount codes</h6>
                         <form>
                             <input type="text" wire:model.defer="discountcode" placeholder="Coupon code">
                             <button type="submit" wire:click.prevent="addDiscount">Apply</button>
                         </form>
-                    </div>
-                    <div class="cart__total">
+                    </div> --}}
+                    <div class="cart__total mt-5">
                         <h6>Cart total</h6>
                         <ul>
-                            <li>Subtotal <span>{{ number_format($totalPrice, 0, ',', ',') }} Đ</span></li>
-                            <li>Total <span>{{ number_format($totalPrice - $discountprice, 0, ',', ',') }} Đ</span>
+                            <li>Total <span>{{ number_format($totalPrice, 0, ',', ',') }} Đ</span>
                             </li>
                         </ul>
                         <button class="primary-btn" type="button" wire:click="checkout"
