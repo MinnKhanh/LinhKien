@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DiscountController;
+use App\Http\Controllers\Admin\IntroduceController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\OrderImport;
 use App\Http\Controllers\Admin\ProductController;
@@ -63,9 +64,7 @@ Route::group([
     Route::get('/contact', [ServiceController::class, 'contact'])->name('contact');
 });
 Route::get('/test', function () {
-    DB::enableQueryLog();
-    $products = Product::with(['Img', 'Discount' => fn ($query) => $query->where('apply', 1)->whereDate('Discount.begin', '<=', date('Y-m-d'))->whereDate('Discount.end', '>=', date('Y-m-d'))])->get()->toArray();
-    dd($products);
+    dd(18.56 / 5);
     // dd(DB::getQueryLog());
     // $this->dispatchBrowserEvent('show-toast', ['type' => 'success', 'message' => 'Cập nhật thành công']);
 });
@@ -157,6 +156,17 @@ Route::group([
         Route::get('/create', [DiscountController::class, 'create'])->name('create');
         // Route::get('/detail', [OrderController::class, 'detailOrder'])->name('detail');
         // Route::get('/sendmail', [OrderController::class, 'sendOrderToMail'])->name('sendmail');
+    });
+    Route::group([
+        'as'     => 'introduce.',
+        'prefix' => 'introduce',
+    ], static function () {
+        Route::get('/', [IntroduceController::class, 'index'])->name('index');
+        Route::get('/create-slide-intro', [IntroduceController::class, 'createSlideIntro'])->name('createslideintro');
+        Route::get('/edit-slide-intro', [IntroduceController::class, 'editSlideIntro'])->name('editslideintro');
+        Route::get('/edit-discount-intro', [IntroduceController::class, 'editDiscountIntro'])->name('editdiscountintro');
+        Route::get('/create-discount-intro', [IntroduceController::class, 'createDiscountIntro'])->name('createslideintro');
+        Route::get('/customize-slide-intro', [IntroduceController::class, 'customizeSlideIntro'])->name('customizeslideintro');
     });
 });
 // Route::get('/test', function () {

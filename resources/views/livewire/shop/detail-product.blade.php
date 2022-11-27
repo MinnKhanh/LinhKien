@@ -1,3 +1,8 @@
+@push('css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+@endpush
 <div>
     <section class="shop-details">
         <div class="product__details__pic">
@@ -96,7 +101,10 @@
                                     <a class="nav-link" data-toggle="tab" href="#tabs-6" role="tab">Customer
                                         Previews(5)</a>
                                 </li>
-
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#tabs-7" role="tab">Đánh giá sản
+                                        phẩm</a>
+                                </li>
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="tabs-5" role="tabpanel">
@@ -146,6 +154,37 @@
                                                 breathable. Velvet is a great choice for dinner party jacket and can be
                                                 worn all year round.</p>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane mt-3" id="tabs-7" role="tabpanel">
+                                    <div class="row">
+
+                                        <form action="" id="formreview"
+                                            class="col-md-12 product__details__tab__content__item">
+                                            @csrf
+                                            <input type="text" class="d-none" name="id"
+                                                value={{ $product['id'] }}>
+                                            <h5>Products Infomation</h5>
+                                            <div class="d-flex my-3">
+                                                <p class="mb-0 mr-2">Đánh giá của bạn * :</p>
+                                                <div id="starrate"></div>
+                                                <input type="number" class="d-none" id="rate" name="rate">
+                                            </div>
+                                            <div>
+                                                <div class="form-group row">
+                                                    <div class='col-6'>
+                                                        <label for="message">Bình luận của bạn *</label>
+                                                        <textarea id="message" name="review" cols="30" rows="5" class="form-control"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class='col-6' style="margin-top: 32px">
+                                                        <input type="button" value="Submit"
+                                                            class="btn btn-primary px-3 rating">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -201,6 +240,8 @@
             </div>
         </div>
     </section>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="{{ asset('js/rating-star-icons/dist/rating.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             $('.addCart').click(function(e) {

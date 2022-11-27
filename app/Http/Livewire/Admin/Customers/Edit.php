@@ -50,7 +50,7 @@ class Edit extends Component
     {
         $this->validate([
             'name' => 'required',
-            'email' => 'required|regex:/(.+)@(.+)\.(.+)/i',
+            'email' => 'required|regex:/(.+)@(.+)\.(.+)/i|unique:users,email',
             'address' => 'required',
             'age' => 'required',
             'password' =>  $this->isedit ? '' : 'required',
@@ -94,7 +94,7 @@ class Edit extends Component
             $this->dispatchBrowserEvent('show-toast', ['type' => 'success', 'message' => $this->isedit ? 'Cập nhật thành công' : 'Tạo thành công']);
         } catch (Throwable $e) {
             DB::rollBack();
-            $this->dispatchBrowserEvent('show-toast', ['type' => 'error', 'message' => $this->isedit ? 'Cập nhật thất bại' : 'Tạo thất bại']);
+            $this->dispatchBrowserEvent('show-toast', ['type' => 'error', 'message' => $e->getMessage()]);
         }
     }
 }

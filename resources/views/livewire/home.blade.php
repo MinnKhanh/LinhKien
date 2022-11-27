@@ -20,6 +20,28 @@
             left: 0px;
             /* z-index: -1; */
         }
+
+        .img-fluid {
+            z-index: -1;
+            width: 100%;
+            position: absolute;
+            height: 100%;
+
+        }
+
+        .product-offer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .offer-text {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
     </style>
 @endpush
 <div>
@@ -206,42 +228,32 @@
         </div>
     </section>
     <!-- Categories Section End -->
-    {{-- <div class="container-fluid pt-5 pb-3">
+    <div class="container-fluid pt-5 pb-3">
         <div class="row px-xl-5">
-            @forelse ($discountshow as $item)
-                <div class="col-md-6">
-                    <div class="product-offer mb-30" style="height: 300px;">
-                        <img class="img-fluid" src="{{ asset('storage') }}" alt="">
-                        <div class="offer-text">
-                            <h6 class="text-white text-uppercase">Tiết Kiệm
-                                100.000
-                                {{ number_format($item['persent'], 0, ',', ',') }}{{ $item['unit'] == 1 ? '%' : 'Đ' }}
-                            </h6>
-                            <h3 class="text-white mb-3"></h3>
-                            <a href="" class="btn btn-primary" type="button" data-toggle="modal"
-                                data-target="#discount_">Mua Ngay</a>
-                        </div>
+            {{-- @forelse ($discountshow as $item) --}}
+            <div class="col-md-6">
+                <div class="product-offer mb-30" style="height: 300px;">
+                    <img class="img-fluid" src="{{ asset('storage/product/9.jpg') }}" alt="">
+                    <div class="offer-text">
+                        <h6 class="text-white text-uppercase" style="font-weight: 800;color: #00ffffd9 !important">
+                            Tiết Kiệm
+                            100.000
+                            {{-- {{ number_format($item['persent'], 0, ',', ',') }}{{ $item['unit'] == 1 ? '%' : 'Đ' }} --}}
+                        </h6>
+                        <h3 class="text-white mb-3" style="font-weight: 700;color:#00ffffd9 !important;">
+                            Khuyến mãi 10
+                            tháng 10
+                        </h3>
+                        <a href="" class="btn btn-primary" type="button" data-toggle="modal"
+                            data-target="#discount_">Mua Ngay</a>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="product-offer mb-30" style="height: 300px;">
-                        <img class="img-fluid" src="{{ asset('storage') }}" alt="">
-                        <div class="offer-text">
-                            <h6 class="text-white text-uppercase">Tiết Kiệm
-                                100.000
-                                {{ number_format($item['persent'], 0, ',', ',') }}{{ $item['unit'] == 1 ? '%' : 'Đ' }}
-                            </h6>
-                            <h3 class="text-white mb-3"></h3>
-                            <a href="" class="btn btn-primary" type="button" data-toggle="modal"
-                                data-target="#discount_">Mua Ngay</a>
-                        </div>
-                    </div>
-                </div>
-            @empty
-            @endforelse
+            </div>
+            {{-- @empty
+            @endforelse --}}
 
         </div>
-    </div> --}}
+    </div>
     <!-- Instagram Section Begin -->
     <section class="instagram spad">
         <div class="container">

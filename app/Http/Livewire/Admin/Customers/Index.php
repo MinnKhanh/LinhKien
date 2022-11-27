@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Customers;
 
+use App\Models\Img;
 use App\Models\Role;
 use App\Models\RoleHasPermisson;
 use App\Models\User;
@@ -73,6 +74,7 @@ class Index extends Component
         DB::beginTransaction();
         try {
             User::where('id', $id)->delete();
+            Img::where('product_id', $id)->where('image_type', 'App\Models\User')->delete();
             DB::table('model_has_permissions')->where('model_id', $id)->delete();
             DB::table('model_has_roles')->where('model_id', $id)->delete();
             DB::commit();
