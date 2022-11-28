@@ -62,9 +62,10 @@ Route::group([
     Route::get('/aboutus', [ServiceController::class, 'aboutus'])->name('aboutus');
     Route::get('/blog', [ServiceController::class, 'blog'])->name('blog');
     Route::get('/contact', [ServiceController::class, 'contact'])->name('contact');
+    Route::get('/coupons', [ServiceController::class, 'coupons'])->name('coupons');
 });
 Route::get('/test', function () {
-    dd(18.56 / 5);
+    return view('shop.index', ['active' => 1]);
     // dd(DB::getQueryLog());
     // $this->dispatchBrowserEvent('show-toast', ['type' => 'success', 'message' => 'Cập nhật thành công']);
 });

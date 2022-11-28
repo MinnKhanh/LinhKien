@@ -28,8 +28,8 @@ class Introduce extends Migration
             $table->bigInteger('id_product')->unsigned();
             $table->bigInteger('id_customer')->unsigned();
             $table->float('number_stars');
-            $table->string('review');
-            $table->string('email');
+            $table->string('review')->nullable();
+            $table->string('email')->nullable();
             $table->timestamps();
         });
     }

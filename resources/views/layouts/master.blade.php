@@ -214,20 +214,23 @@
                 <div class="col-lg-6 col-md-6">
                     <nav class="header__menu mobile-menu">
                         <ul>
-                            <li class="{{ $active == 1 ? 'active' : '' }}"><a href="{{ route('home') }}">Home</a>
+                            <li class="{{ $active == 1 ? 'active' : '' }}"><a href="{{ route('home') }}">Trang
+                                    chủ</a>
                             </li>
-                            <li class="{{ $active == 2 ? 'active' : '' }}"><a
-                                    href="{{ route('shop.index') }}">Shop</a></li>
-                            <li class="{{ $active == 3 ? 'active' : '' }}"><a href="#">Pages</a>
+                            <li class="{{ $active == 2 ? 'active' : '' }}"><a href="{{ route('shop.index') }}">Sản
+                                    phẩm</a></li>
+                            <li class="{{ $active == 3 ? 'active' : '' }}"><a href="#">Trang</a>
                                 <ul class="dropdown">
-                                    <li><a href="{{ route('service.aboutus') }}">About Us</a></li>
-                                    <li><a href="{{ route('cart.index') }}">Shopping Cart</a></li>
+                                    <li><a href="{{ route('service.aboutus') }}">Thông tin cửa hàng</a></li>
+                                    <li><a href="{{ route('cart.index') }}">Giỏ hàng</a></li>
                                     <li><a href="{{ route('service.blog') }}">Blog Details</a></li>
+                                    <li><a href="{{ route('service.coupons') }}">Phiếu khuyến mãi</a></li>
                                 </ul>
                             </li>
-                            <li class="{{ $active == 4 ? 'active' : '' }}"><a
-                                    href="{{ route('order.index') }}">Order</a></li>
-                            <li class="{{ $active == 5 ? 'active' : '' }}"><a href="./contact.html">Contacts</a></li>
+                            <li class="{{ $active == 4 ? 'active' : '' }}"><a href="{{ route('order.index') }}">Đơn
+                                    hàng</a></li>
+                            <li class="{{ $active == 5 ? 'active' : '' }}"><a href="./contact.html">Liên kết</a>
+                            </li>
                         </ul>
                     </nav>
                 </div>
@@ -328,6 +331,7 @@
         </div>
     </div>
     <!-- Search End -->
+    @yield('modal')
     <!-- Js Plugins -->
     @livewireScripts
     @include('layouts._script')

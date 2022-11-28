@@ -2,14 +2,23 @@
     <style>
         .hero__items {
             height: auto !important;
-            padding-top: 1rem !important;
-            padding-bottom: 1rem;
+            padding-top: 4rem !important;
+            padding-bottom: 4rem;
             background-position: center;
 
         }
 
         .categories__hot__deal img {
             height: 20rem !important;
+        }
+
+        .img-fluid {
+            height: 260px;
+
+        }
+
+        .priceitem {
+            font-size: .9rem
         }
 
         .link {
@@ -47,23 +56,27 @@
 <div>
     <section class="hero mt-5">
         <div class="hero__slider owl-carousel mb-5">
-            <div class="hero__items set-bg" data-setbg="{{ asset('storage/home/1.jpg') }}">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-5 col-lg-7 col-md-8">
-                            <div class="hero__text">
-                                <h6>Big Sales</h6>
-                                <h2>Bộ phụ kiện đồ điện tử</h2>
-                                <p>Phụ kiện đồ điện tử cao cấp chất lượng cao, đa dạng chủng loại giá thành
-                                    hấp dẫn</p>
-                                <a href="{{ route('shop.index') }}" class="primary-btn">Mua Ngay <span
-                                        class="arrow_right"></span></a>
+            @forelse ($slides as $item)
+                <div class="hero__items set-bg"
+                    data-setbg="{{ asset('storage/introduce/' . $item['img'][0]['image_name']) }}">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-5 col-lg-7 col-md-8">
+                                <div class="hero__text">
+                                    <h6>{{ $item['subtitle'] }}</h6>
+                                    <h2>{{ $item['title'] }}</h2>
+                                    <p>{{ $item['description'] }}</p>
+                                    <a href="{{ $item['link'] }}" class="primary-btn">Mua Ngay <span
+                                            class="arrow_right"></span></a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="hero__items set-bg" data-setbg="{{ asset('storage/home/2.jpg') }}">
+            @empty
+            @endforelse
+
+            {{-- <div class="hero__items set-bg" data-setbg="{{ asset('storage/home/2.jpg') }}">
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-5 col-lg-7 col-md-8">
@@ -78,7 +91,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </section>
     <!-- Hero Section End -->
@@ -91,9 +104,9 @@
             <div class="row">
                 <div class="col-lg-12">
                     <ul class="filter__controls">
-                        <li class="active" data-filter="*">Best Sellers</li>
-                        <li data-filter=".new-arrivals">New Arrivals</li>
-                        <li data-filter=".hot-sales">Best Sale</li>
+                        <li class="active" data-filter="*">Sản phẩm ưa chuộng</li>
+                        <li data-filter=".new-arrivals">Sản phẩm mới</li>
+                        <li data-filter=".hot-sales">Sản phẩm bán chạy nhất</li>
                     </ul>
                 </div>
             </div>
@@ -230,27 +243,43 @@
     <!-- Categories Section End -->
     <div class="container-fluid pt-5 pb-3">
         <div class="row px-xl-5">
-            {{-- @forelse ($discountshow as $item) --}}
-            <div class="col-md-6">
-                <div class="product-offer mb-30" style="height: 300px;">
-                    <img class="img-fluid" src="{{ asset('storage/product/9.jpg') }}" alt="">
-                    <div class="offer-text">
-                        <h6 class="text-white text-uppercase" style="font-weight: 800;color: #00ffffd9 !important">
-                            Tiết Kiệm
-                            100.000
-                            {{-- {{ number_format($item['persent'], 0, ',', ',') }}{{ $item['unit'] == 1 ? '%' : 'Đ' }} --}}
-                        </h6>
-                        <h3 class="text-white mb-3" style="font-weight: 700;color:#00ffffd9 !important;">
-                            Khuyến mãi 10
-                            tháng 10
-                        </h3>
-                        <a href="" class="btn btn-primary" type="button" data-toggle="modal"
-                            data-target="#discount_">Mua Ngay</a>
+            @forelse ($discounts as $item)
+                <div class="col-md-6">
+                    <div class="product-offer mb-30" style="height: 300px;">
+                        <img class="img-fluid"
+                            src="{{ asset('storage/introduce/' . $item['img'][0]['image_name']) }}" alt="">
+                        <div class="offer-text">
+                            <h6 class="text-white text-uppercase"
+                                style="font-weight: 800;color: #000000d9 !important">
+                                Giảm giá
+                                {{-- {{ $item['percent'] }} {{ $item['percent'] == 1 ? '%' : 'Đ' }} --}}
+                                {{ number_format($item['percent'], 0, ',', ',') }}{{ $item['unit'] == 1 ? '%' : 'Đ' }}
+                            </h6>
+                            <h3 class="text-white" style="font-weight: 700;color:#ffffffd9 !important;">
+                                {{ $item['title'] }}</h3>
+                            <p class="text-white" style="color:#ffffffd9 !important;">
+                                {{ $item['description'] }}</p>
+                            @if ($item['expiry'])
+                                <div class="col-12 mb-2 text-center">Từ {{ $item['begin'] }} đến
+                                    {{ $item['end'] }}</div>
+                            @else
+                                <div class="col-12 mb-2 text-center">Đã hết hạn</div>
+                            @endif
+                            {{-- <a href="#" class="primary-btn" data-toggle="modal"
+                                data-target="#discount_{{ $item['id'] }}">Nhận Ngay</a> --}}
+                            @if (auth()->check())
+                                <button type="button" class="primary-btn adddiscount"
+                                    data-id={{ $item['relate_id'] }}>
+                                    {{ $item['discount']['discount_user'] ? 'Đã Nhận' : 'Nhận' }}
+                                </button>
+                            @else
+                                <a class="btn btn-primary" href="{{ route('auth.login') }}">Nhận</a>
+                            @endif
+                        </div>
                     </div>
                 </div>
-            </div>
-            {{-- @empty
-            @endforelse --}}
+            @empty
+            @endforelse
 
         </div>
     </div>
@@ -317,4 +346,14 @@
             </div>
         </div>
     </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            $(document).on('click', '.adddiscount', function() {
+                let id = parseInt($(this).attr('data-id'));
+                window.livewire.emit('addDiscountToUser', {
+                    0: id
+                });
+            })
+        })
+    </script>
 </div>

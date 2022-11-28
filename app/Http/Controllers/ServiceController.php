@@ -23,4 +23,8 @@ class ServiceController extends Controller
     {
         return view('contact.contact');
     }
+    public function coupons(Request $request)
+    {
+        return view('service.coupons');
+    }
 }

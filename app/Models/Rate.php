@@ -16,4 +16,12 @@ class Rate extends Model
         'review',
         'email',
     ];
+    protected $casts = [
+        'created_at' => 'date:d/m/Y',
+        'updated_at' => 'date:d/m/Y',
+    ];
+    public function Img()
+    {
+        return $this->morphMany(Img::class, 'product_id', 'image_type');
+    }
 }
