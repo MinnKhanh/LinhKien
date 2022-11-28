@@ -14,6 +14,7 @@ class Index extends Component
 {
     use WithPagination;
     public $perPage;
+    public $searchName;
     protected $paginationTheme = 'bootstrap';
     public function mount()
     {
@@ -23,7 +24,11 @@ class Index extends Component
     }
     public function render()
     {
-        $products = Product::with('Img')->paginate($this->perPage);
+        $products = Product::query()->with('Img');
+        if ($this->searchName) {
+            $products->where('product_name', 'like', '%' . trim($this->searchName) . '%');
+        }
+        $products = $products->paginate($this->perPage);
         return view('livewire.admin.product.index', ['products' => $products]);
     }
     public function removeProduct($id)

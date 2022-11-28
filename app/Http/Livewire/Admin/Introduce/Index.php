@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Introduce;
 
+use App\Models\Img;
 use App\Models\Introduce;
 use App\Models\User;
 use Livewire\Component;
@@ -27,6 +28,16 @@ class Index extends Component
             $introduce = Introduce::where('id', $id)->first();
             $introduce->active = $introduce->active == 1 ? 0 : 1;
             $introduce->save();
+        }
+    }
+    public function removeIntro($id)
+    {
+        if ($id) {
+            Img::where('product_id', $id)->where('image_type', 'App\Models\Introduce')->delete();
+            Introduce::where('id', $id)->delete();
+            $this->dispatchBrowserEvent('show-toast', ['type' => 'success', 'message' => 'Xóa thành công']);
+        } else {
+            $this->dispatchBrowserEvent('show-toast', ['type' => 'warning', 'message' => 'Xóa thất bại, vui lòng thử lại sau']);
         }
     }
 }

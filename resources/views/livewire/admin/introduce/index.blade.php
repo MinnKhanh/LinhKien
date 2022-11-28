@@ -14,8 +14,8 @@
             <div class="mr-3">
                 <label for="" class="d-block">Loại</label>
                 <select wire:model="type" class="form-control">
-                    <option value=1>Quảng cáo chính</option>
-                    <option value=2>Quảng cáo giảm giá</option>
+                    <option value=1>Quảng cáo giảm giá</option>
+                    <option value=2>Quảng cáo chính</option>
                 </select>
             </div>
         </div>
@@ -59,13 +59,20 @@
                             class="text-center align-middle d-flex justify-content-center align-items-center"
                             style="height: 85px;padding:0px">
                             <li class="list-inline-item icon-trash">
-                                <a href="{{ route('admin.discount.edit', ['id' => $item['id']]) }}"
-                                    class="btn btn-warning btn-sm rounded-0" type="button" data-toggle="tooltip"
-                                    data-placement="top" title="Edit"><i class="fa fa-pencil"></i></a>
+                                @if ($type == 1)
+                                    <a href="{{ route('admin.introduce.editdiscountintro', ['id' => $item['id']]) }}"
+                                        class="btn btn-warning btn-sm rounded-0" type="button" data-toggle="tooltip"
+                                        data-placement="top" title="Edit"><i class="fa fa-pencil"></i></a>
+                                @else
+                                    <a href="{{ route('admin.introduce.editslideintro', ['id' => $item['id']]) }}"
+                                        class="btn btn-warning btn-sm rounded-0" type="button" data-toggle="tooltip"
+                                        data-placement="top" title="Edit"><i class="fa fa-pencil"></i></a>
+                                @endif
+
                             </li>
                             <li class="list-inline-item icon-trash">
                                 <button class="btn btn-danger btn-sm rounded-0" type="button"
-                                    wire:click="removeDiscount({{ $item['id'] }})" data-toggle="tooltip"
+                                    wire:click="removeIntro({{ $item['id'] }})" data-toggle="tooltip"
                                     data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
                             </li>
                         </th>

@@ -223,7 +223,8 @@
                                 <ul class="dropdown">
                                     <li><a href="{{ route('service.aboutus') }}">Thông tin cửa hàng</a></li>
                                     <li><a href="{{ route('cart.index') }}">Giỏ hàng</a></li>
-                                    <li><a href="{{ route('service.blog') }}">Blog Details</a></li>
+                                    <li><a href="{{ route('service.blog') }}">Tin tức và tài liệu hướng dẫn</a>
+                                    </li>
                                     <li><a href="{{ route('service.coupons') }}">Phiếu khuyến mãi</a></li>
                                 </ul>
                             </li>

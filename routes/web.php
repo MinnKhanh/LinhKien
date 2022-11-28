@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\IntroduceController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\OrderImport;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ShopInformation;
 use App\Http\Controllers\Admin\StatisticalController;
 use App\Http\Controllers\Admin\VendorController;
 use App\Http\Controllers\Auth\ChangePassword;
@@ -60,7 +61,7 @@ Route::group([
     'prefix' => 'service',
 ], static function () {
     Route::get('/aboutus', [ServiceController::class, 'aboutus'])->name('aboutus');
-    Route::get('/blog', [ServiceController::class, 'blog'])->name('blog');
+    Route::get('/news', [ServiceController::class, 'news'])->name('news');
     Route::get('/contact', [ServiceController::class, 'contact'])->name('contact');
     Route::get('/coupons', [ServiceController::class, 'coupons'])->name('coupons');
 });
@@ -166,8 +167,16 @@ Route::group([
         Route::get('/create-slide-intro', [IntroduceController::class, 'createSlideIntro'])->name('createslideintro');
         Route::get('/edit-slide-intro', [IntroduceController::class, 'editSlideIntro'])->name('editslideintro');
         Route::get('/edit-discount-intro', [IntroduceController::class, 'editDiscountIntro'])->name('editdiscountintro');
-        Route::get('/create-discount-intro', [IntroduceController::class, 'createDiscountIntro'])->name('createslideintro');
+        Route::get('/create-discount-intro', [IntroduceController::class, 'createDiscountIntro'])->name('creatediscountintro');
         Route::get('/customize-slide-intro', [IntroduceController::class, 'customizeSlideIntro'])->name('customizeslideintro');
+    });
+    Route::group([
+        'as'     => 'inforshop.',
+        'prefix' => 'inforshop',
+    ], static function () {
+        Route::get('/create-news', [ShopInformation::class, 'news'])->name('createnew');
+        Route::get('/list-news', [ShopInformation::class, 'listnews'])->name('listnews');
+        Route::get('/edit-new', [ShopInformation::class, 'editNew'])->name('editnew');
     });
 });
 // Route::get('/test', function () {

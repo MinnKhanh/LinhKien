@@ -122,28 +122,52 @@
             </div>
         </li>
         <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#intro" role="button" aria-expanded="false"
+                aria-controls="intro">
+                <i class="fa-solid fa-store menu-icon"></i>
+                <span class="menu-title">Introduces</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="intro">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.introduce.index') }}">Danh quảng
+                            cáo</a></li>
+                    <li class="nav-item"><a class="nav-link"
+                            href="{{ route('admin.introduce.createslideintro') }}">Tạo
+                            Slide giới thiệu</a></li>
+                    <li class="nav-item"><a class="nav-link"
+                            href="{{ route('admin.introduce.creatediscountintro') }}">Tạo
+                            phiếu giảm giá</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="{{ route('admin.statistical.index') }}">
                 <i class="fa-sharp fa-solid fa-bar-chart menu-icon"></i>
                 <span class="menu-title">Thống kê</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" data-toggle="collapse" href="#new" role="button" aria-expanded="false"
+                aria-controls="new">
                 <i class="fa-solid fa-newspaper menu-icon"></i>
                 <span class="menu-title">Tin tức</span>
+                <i class="menu-arrow"></i>
             </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fa-solid fa-carousel menu-icon"></i>
-                <span class="menu-title">Slide intro</span>
-            </a>
+            <div class="collapse" id="new">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.inforshop.listnews') }}">Danh
+                            các bản tin</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.inforshop.createnew') }}">Tạo
+                            bản tin</a></li>
+                </ul>
+            </div>
         </li>
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#discount" role="button" aria-expanded="false"
                 aria-controls="discount">
-                <i class="mdi mdi-account menu-icon"></i>
-                <span class="menu-title">discount</span>
+                <i class="fa-sharp fa-solid fa-ticket menu-icon"></i>
+                <span class="menu-title">Mã Giảm giá</span>
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="discount">
@@ -154,12 +178,6 @@
                             phiếu khuyến mãi</a></li>
                 </ul>
             </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fa-sharp fa-solid fa-ticket menu-icon"></i>
-                <span class="menu-title">Mã giảm giá</span>
-            </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">

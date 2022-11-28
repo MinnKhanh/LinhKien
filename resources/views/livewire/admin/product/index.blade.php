@@ -1,4 +1,10 @@
 <div>
+    <div class="d-flex mb-5">
+        <div class="mr-3">
+            <label for="" class="d-block">Tên</label>
+            <input wire:model="searchName" class="form-control" id="name" placeholder="Tên sản phẩm">
+        </div>
+    </div>
     <table class="table container">
         <thead class="thead-dark">
             <tr>

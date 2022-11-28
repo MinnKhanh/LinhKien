@@ -15,13 +15,18 @@ class Index extends Component
     use WithPagination;
     public $perPage;
     protected $paginationTheme = 'bootstrap';
+    public $searchName;
     public function mount()
     {
         $this->perPage = 6;
     }
     public function render()
     {
-        $brands = Brand::with('Img')->paginate($this->perPage);
+        $brands = Brand::query()->with('Img');
+        if ($this->searchName) {
+            $brands->where('brand_name', 'like', '%' . trim($this->searchName) . '%');
+        }
+        $brands = $brands->paginate($this->perPage);
         return view('livewire.admin.brand.index', ['brands' => $brands]);
     }
     public function removeBrand($id)
