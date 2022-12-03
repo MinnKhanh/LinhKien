@@ -43,7 +43,7 @@
 <div class="container">
     <div wire:loading class="loader" style="z-index: 1"></div>
     <h4 class="co-6 checkout__input mt-4 mb-3"> Thông Tin</h4>
-    <a href="{{ route('user.changepassword') }}" class="btn btn-primary">Đổi mật khẩu</a>
+    {{-- <a href="{{ route('user.changepassword') }}" class="btn btn-primary">Đổi mật khẩu</a> --}}
     <form class="row">
         @csrf
         <div class="col-12 form-row">

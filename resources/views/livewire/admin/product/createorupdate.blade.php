@@ -44,7 +44,8 @@
     <div wire:loading class="loader" style="z-index: 1"></div>
     <form class="row">
         @csrf
-        <h4 class="co-6 checkout__input mb-5 border-bottom"> {{ isset($isedit) ? 'Update Product' : 'New Product' }}</h4>
+        <h4 class="co-6 checkout__input mb-5 border-bottom">
+            {{ isset($isedit) ? 'Cập Nhật Sản Phẩm' : 'Tạo Sản Phẩm Mới' }}</h4>
         <div class="col-12 form-row">
             <div class="col-4">
                 <div class="checkout__input">
@@ -182,7 +183,7 @@
                     Trở lại
                 </a>
                 <button wire:click.prevent="store" type="button" class="btn btn-primary"><i class="fa fa-plus"></i>
-                    {{ isset($isedit) ? 'Update' : 'Create' }}</button>
+                    {{ isset($isedit) ? 'Cập nhật' : 'Tạo' }}</button>
 
             </div>
         </div>

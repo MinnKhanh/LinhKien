@@ -19,6 +19,7 @@ class CreateNewComment extends Migration
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->string('comment')->nullable();
+            $table->bigInteger('owner')->nullable()->unsigned();
             $table->integer('type');
             $table->timestamps();
         });

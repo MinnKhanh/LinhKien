@@ -15,9 +15,11 @@ class Newdetail extends Component
     public $name;
     public $email;
     public $new;
+    public $reviews;
     public function mount()
     {
         if ($this->new) {
+            $this->reviews = Comment::where('type', 1)->where('owner', $this->new)->get()->toArray();
             $this->data = News::with(['Img', 'User' => function ($q) {
                 $q->with('Img');
             }])->where('id', $this->new)->first()->toArray();
@@ -41,17 +43,20 @@ class Newdetail extends Component
             Comment::updateOrCreate(
                 [
                     'email' => $this->email,
-                    'type' => 1
+                    'type' => 1,
+                    'owner' => $this->new
                 ],
                 [
                     'name' => $this->name,
                     'comment' => $this->comment
+
                 ]
             );
             $this->name = null;
             $this->email = null;
             $this->comment = null;
             $this->dispatchBrowserEvent('show-toast', ['type' => 'success', 'message' => 'Gửi thành công']);
+            $this->reviews = Comment::where('type', 1)->where('owner', $this->new)->get()->toArray();
             DB::commit();
         } catch (Throwable $e) {
             DB::rollBack();

@@ -14,6 +14,7 @@ class Index extends Component
 {
     use WithPagination;
     public $perPage;
+    public $type = Typediscount::BYPRODUCT;
     protected $listeners = ['changeApply' => 'changeApply'];
     public function mount()
     {
@@ -21,7 +22,7 @@ class Index extends Component
     }
     public function render()
     {
-        $listdata = Discount::with('Img')->paginate($this->perPage);
+        $listdata = Discount::with('Img')->where('type', $this->type)->paginate($this->perPage);
         return view('livewire.admin.discount.index', ['listdata' => $listdata]);
     }
     public function removeDiscount($id)

@@ -16,12 +16,12 @@
         <thead class="thead-dark">
             <tr>
                 <th scope="col" class="text-center">#</th>
-                <th scope="col" class="text-center">Image</th>
-                <th scope="col" class="text-center">Name</th>
-                <th scope="col" class="text-center">Nation</th>
-                <th scope="col" class="text-center">Description</th>
+                <th scope="col" class="text-center">Ảnh</th>
+                <th scope="col" class="text-center">Tên</th>
+                <th scope="col" class="text-center">Quốc gia</th>
+                <th scope="col" class="text-center">Mô tả</th>
                 <th scope="col" class="text-center">Website</th>
-                <th scope="col" class="fix text-center">Tool</th>
+                <th scope="col" class="fix text-center">Công cụ</th>
             </tr>
         </thead>
         <tbody>

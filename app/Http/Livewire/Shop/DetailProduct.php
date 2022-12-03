@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Shop;
 
 use App\Models\Cart;
 use App\Models\Img;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Rate;
 use Exception;
@@ -27,15 +28,20 @@ class DetailProduct extends Component
     public $myrate;
     public $create = 1;
     public $listrates;
+    public $numberstar;
+    public $isorder;
+    public $productinstock;
     public function mount()
     {
         $this->listrates = Rate::with('Img')->join('users', 'users.id', 'id_customer')->where('id_product', $this->product_id)->select(DB::raw('users.name,rate.review,rate.number_stars,rate.id,rate.id_customer,id_product,rate.created_at'))->get()->toArray();
         // dd($this->listrates);
+        $this->isorder = Order::join('users', 'users.id', 'order.user')->join('orderdetail', 'orderdetail.order_id', 'order.id')->where('orderdetail.product_id', $this->product_id)->count();
         $this->myrate  =  Rate::where('id_customer', auth()->user()->id)->where('id_product', $this->product_id)->first();
         if ($this->myrate) {
             $this->create = 2;
         }
         $this->product = Product::with('Img')->where('id', $this->product_id)->first()->toArray();
+        $this->productinstock = $this->product['amount'];
         $this->listProductSuggest = Product::with('Img')->where('id', '!=', $this->product_id)->where('category_id', $this->product['category_id'])->skip(0)->take(4)->get()->toArray();
     }
     public function changeActive($data)
@@ -83,6 +89,8 @@ class DetailProduct extends Component
             $product->update([
                 'amount' => $product->amount - $this->quantity
             ]);
+            $this->productinstock = $product->amount - $this->quantity;
+            $this->quantity = 0;
             DB::commit();
             $this->dispatchBrowserEvent('show-toast', ['type' => 'success', 'message' => "Thêm thành công"]);
         } catch (Throwable $th) {

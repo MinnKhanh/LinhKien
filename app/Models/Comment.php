@@ -14,7 +14,8 @@ class Comment extends Model
         'email',
         'phone',
         'comment',
-        'type'
+        'type',
+        'owner'
     ];
     protected $casts = [
         'created_at' => 'date:d/m/Y',

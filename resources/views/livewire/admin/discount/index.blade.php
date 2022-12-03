@@ -9,6 +9,17 @@
     @php
         use App\Enums\Typediscount;
     @endphp
+
+    <div class="d-flex mb-5">
+        <div class="mr-3">
+            <label for="" class="d-block">Loại</label>
+            <select wire:model="type" class="form-control" id="type">
+                @foreach (Typediscount::getValues() as $item)
+                    <option value={{ $item }}>{{ Typediscount::getTypesOfDiscount($item) }}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
     <table class="table container">
         <thead class="thead-dark">
             <tr>

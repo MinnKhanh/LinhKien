@@ -12,11 +12,11 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__text">
-                        <h4>Shopping Cart</h4>
+                        <h4>Giỏ Hàng</h4>
                         <div class="breadcrumb__links">
-                            <a href="./index.html">Home</a>
-                            <a href="./shop.html">Shop</a>
-                            <span>Shopping Cart</span>
+                            <a href="./index.html">Trang chủ</a>
+                            <a href="./shop.html">Sản phẩm</a>
+                            <span>Giỏ hàng</span>
                         </div>
                     </div>
                 </div>
@@ -33,9 +33,9 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Product</th>
-                                    <th>Quantity</th>
-                                    <th>Total</th>
+                                    <th>Sản phẩm</th>
+                                    <th>Số lượng</th>
+                                    <th>Giá</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -92,7 +92,7 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="continue__btn">
-                                <a href="{{ route('shop.index') }}">Continue Shopping</a>
+                                <a href="{{ route('shop.index') }}">Tiếp tục mua</a>
                             </div>
                         </div>
                     </div>
@@ -106,14 +106,13 @@
                         </form>
                     </div> --}}
                     <div class="cart__total mt-5">
-                        <h6>Cart total</h6>
+                        <h6>Tổng hóa đơn</h6>
                         <ul>
                             <li>Total <span>{{ number_format($totalPrice, 0, ',', ',') }} Đ</span>
                             </li>
                         </ul>
                         <button class="primary-btn" type="button" wire:click="checkout"
-                            style="color:white;width: 100%;">Proceed
-                            to checkout</button>
+                            style="color:white;width: 100%;">Nhập thông tin hóa đơn</button>
                         </form>
 
                     </div>

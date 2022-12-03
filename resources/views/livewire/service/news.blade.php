@@ -21,7 +21,7 @@
                                 <span><img src="img/icon/calendar.png"
                                         alt="">{{ $item['created_at']->format('d/m/Y') }}</span>
                                 <h5>{{ $item['title'] }}</h5>
-                                <a href="{{ route('service.newdetail', ['new' => $item['id']]) }}">Read More</a>
+                                <a href="{{ route('service.newdetail', ['new' => $item['id']]) }}">Chi tiết</a>
                             </div>
                         </div>
                     </div>

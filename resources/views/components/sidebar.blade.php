@@ -138,6 +138,9 @@
                     <li class="nav-item"><a class="nav-link"
                             href="{{ route('admin.introduce.creatediscountintro') }}">Tạo
                             phiếu giảm giá</a></li>
+                    <li class="nav-item"><a class="nav-link"
+                            href="{{ route('admin.introduce.customizeslideintro') }}">Thiết lập side quảng cáo</a>
+                    </li>
                 </ul>
             </div>
         </li>

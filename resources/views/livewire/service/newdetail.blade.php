@@ -1,3 +1,12 @@
+@push('css')
+    <style>
+        .grouplist {
+            background: #eeeeee;
+            border-radius: 5px;
+            padding: 1rem;
+        }
+    </style>
+@endpush
 <div>
     <div class="container mt-5">
         <div class="row d-flex justify-content-center">
@@ -55,10 +64,24 @@
                                 <div class="col-lg-12 text-center">
                                     <textarea placeholder="Bình luận" wire:model="comment"></textarea>
                                     <button type="button" wire:click="sendComment" class="site-btn">Gửi bình
-                                        luần</button>
+                                        luận</button>
                                 </div>
                             </div>
                         </form>
+                    </div>
+                    <div class="tab-pane mb-5" id="tabs-6" role="tabpanel">
+                        <div class="product__details__tab__content">
+                            <h3 class="border-bottom">Danh sách bình luận</h3>
+                            @forelse ($reviews as $item)
+                                <div class="product__details__tab__content__item grouplist mt-3">
+                                    <h6 style="font-weight: 600" class="mb-1">{{ $item['name'] }}</h6>
+                                    <div class="ml-2">Thời gian: {{ $item['created_at'] }}</div>
+                                    <p class="ml-2">Bình luận: {{ $item['comment'] }}</p>
+                                </div>
+                            @empty
+                                Hiện chưa có đánh giá nào
+                            @endforelse
+                        </div>
                     </div>
                 </div>
             </div>

@@ -26,16 +26,18 @@ class Checkout extends Component
     public $phone;
     public $email;
     public $note;
-    public $payment;
+    public $payment = 1;
     public $discounts;
     public $ship = Ship::NOITHANH;
     public $quantity;
+    protected $listeners = ['checkout' => 'checkout'];
     public $discount;
     public $discountprice = 0;
     public function mount(Request $request)
     {
         // $cart = Cart::where('user', auth()->user()->id);
         DB::enableQueryLog();
+
         $this->carts = Product::with(["Img", 'Discount' => fn ($query) =>
         $query->where('apply', 1)->whereDate('Discount.begin', '<=', date('Y-m-d'))->whereDate('Discount.end', '>=', date('Y-m-d'))])->join('cart', 'cart.product', 'product.id')->where('user', auth()->user()->id)->get()->toArray();
         $datacart = array_reduce($this->carts, function ($carry, $item) {
@@ -68,6 +70,7 @@ class Checkout extends Component
     }
     public function render()
     {
+        $this->dispatchBrowserEvent('paypal');
         if ($this->city != 'Hà Nội' && $this->city) {
             $this->ship = Ship::NGOAITHANH;
         } else {
@@ -75,6 +78,10 @@ class Checkout extends Component
         }
         $this->applyDiscount();
         return view('livewire.service.checkout');
+    }
+    public function checkout()
+    {
+        $this->submit();
     }
     public function submit()
     {

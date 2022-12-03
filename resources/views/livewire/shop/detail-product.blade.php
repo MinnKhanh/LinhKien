@@ -136,9 +136,9 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="product__details__breadcrumb">
-                            <a href="./index.html">Home</a>
-                            <a href="./shop.html">Shop</a>
-                            <span>Product Details</span>
+                            <a href="./index.html">Trang chủ</a>
+                            <a href="./shop.html">Sản phẩm</a>
+                            <span>Chi Tiết Sản Phẩm</span>
                         </div>
                     </div>
                 </div>
@@ -191,6 +191,7 @@
                             </div>
                             <h3>{{ number_format($product['price'], 0, ',', ',') }} Đ</h3>
                             <p>{{ $product['description'] }}</p>
+                            <p>Sản phẩm còn trong kho: {{ $productinstock }}</p>
                             <div class="product__details__cart__option">
                                 <div class="quantity">
                                     <div class="">
@@ -198,26 +199,13 @@
                                     </div>
                                 </div>
                                 @if (auth()->check())
-                                    <a wire:click="addToCart()" class="primary-btn addCart" style="color:white;">add to
-                                        cart</a>
+                                    <a wire:click="addToCart()" class="primary-btn addCart" style="color:white;">Thêm
+                                        giỏ hàng</a>
                                 @else
-                                    <a href="{{ route('login') }}" class="primary-btn addCart" style="color:white;">add
-                                        to
-                                        cart</a>
+                                    <a href="{{ route('login') }}" class="primary-btn addCart" style="color:white;">Thêm
+                                        giỏ hàng</a>
                                 @endif
 
-                            </div>
-                            <div class="product__details__btns__option">
-                                <a href="#"><i class="fa fa-heart"></i> add to wishlist</a>
-                            </div>
-                            <div class="product__details__last__option">
-                                <h5><span>Guaranteed Safe Checkout</span></h5>
-                                <img src="img/shop-details/details-payment.png" alt="">
-                                <ul>
-                                    <li><span>SKU:</span> 3812912</li>
-                                    <li><span>Categories:</span> Clothes</li>
-                                    <li><span>Tag:</span> Clothes, Skin, Body</li>
-                                </ul>
                             </div>
                         </div>
                     </div>
@@ -234,7 +222,7 @@
                                     <a class="nav-link {{ $active == 2 ? 'active' : '' }}" data-toggle="tab"
                                         href="#tabs-6" role="tab">Đánh giá của người dùng</a>
                                 </li>
-                                @if (auth()->check())
+                                @if (auth()->check() && $isorder)
                                     <li wire:click="changeActive(3)" class="nav-item">
                                         <a class="nav-link {{ $active == 3 ? 'active' : '' }}" data-toggle="tab"
                                             href="#tabs-7" role="tab">Đánh giá sản
@@ -246,20 +234,14 @@
                                 <div class="tab-pane {{ $active == 1 ? 'active' : '' }}" id="tabs-5"
                                     role="tabpanel">
                                     <div class="product__details__tab__content">
-                                        <p class="note">Description </p>
+                                        <p class="note">Mô tả </p>
                                         <div class="product__details__tab__content__item">
-                                            <h5>Products Infomation</h5>
+                                            <h5>Thông tin sản phẩm</h5>
                                             <p>{{ $product['description'] }}</p>
                                         </div>
                                         <div class="product__details__tab__content__item">
                                             <h5>{{ $product['product_name'] }}</h5>
-                                            <p>Polyester is deemed lower quality due to its none natural quality’s. Made
-                                                from synthetic materials, not natural like wool. Polyester suits become
-                                                creased easily and are known for not being breathable. Polyester suits
-                                                tend to have a shine to them compared to wool and cotton suits, this can
-                                                make the suit look cheap. The texture of velvet is luxurious and
-                                                breathable. Velvet is a great choice for dinner party jacket and can be
-                                                worn all year round.</p>
+                                            <p>{{ $product['description'] }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -272,7 +254,7 @@
                                                 <div>{{ $item['name'] }}</div>
                                                 <div class="rating ml-2 mb-2">
                                                     @for ($i = 1; $i < $item['number_stars']; $i++)
-                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star" style="color:#f3f32e;"></i>
                                                     @endfor
                                                 </div>
                                                 <div class="ml-2">Thời gian: {{ $item['created_at'] }}</div>
@@ -403,7 +385,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h3 class="related-title">Related Product</h3>
+                    <h3 class="related-title">Sản phẩm tương tự</h3>
                 </div>
             </div>
             <div class="row">

@@ -5,6 +5,8 @@
                 color: red;
             }
         </style>
+
+        <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
     @endpush
     <section class="breadcrumb-option">
         <div class="container">
@@ -13,8 +15,8 @@
                     <div class="breadcrumb__text">
                         <h4>Check Out</h4>
                         <div class="breadcrumb__links">
-                            <a href="./index.html">Home</a>
-                            <a href="./shop.html">Shop</a>
+                            <a href="./index.html">Trang chủ</a>
+                            <a href="./shop.html">Sản phẩm</a>
                             <span>Check Out</span>
                         </div>
                     </div>
@@ -32,11 +34,11 @@
                             {{-- <h6 class="coupon__code"><span class="icon_tag_alt"></span> Have a coupon? <a
                                     href="#">Click
                                     here</a> to enter your code</h6> --}}
-                            <h6 class="checkout__title">Billing Details</h6>
+                            <h6 class="checkout__title">Chi tiết thông tin hóa đơn</h6>
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="checkout__input">
-                                        <p>Name<span>*</span></p>
+                                        <p>Tên<span>*</span></p>
                                         <input type="text" style="color:black !important;" wire:model="name">
                                         <p class="error">
                                             @error('name')
@@ -47,7 +49,7 @@
                                 </div>
                             </div>
                             <div class="checkout__input">
-                                <p>Country<span>*</span></p>
+                                <p>Quốc gia<span>*</span></p>
                                 <input type="text" style="color:black !important;" wire:model.defer="country">
                                 <p class="error">
                                     @error('country')
@@ -56,7 +58,7 @@
                                 </p>
                             </div>
                             <div class="checkout__input">
-                                <p>Address<span>*</span></p>
+                                <p>Địa chỉ<span>*</span></p>
                                 <input type="text" style="color:black !important;" wire:model.defer="address"
                                     placeholder="Street Address" class="checkout__input__add">
                                 <p class="error">
@@ -66,7 +68,7 @@
                                 </p>
                             </div>
                             <div class="checkout__input">
-                                <p>City<span>*</span></p>
+                                <p>Thành phố<span>*</span></p>
                                 <input type="text" style="color:black !important;" wire:model="city">
                                 <p class="error">
                                     @error('city')
@@ -75,7 +77,7 @@
                                 </p>
                             </div>
                             <div class="checkout__input">
-                                <p>District<span>*</span></p>
+                                <p>Quận/Huyện<span>*</span></p>
                                 <input type="text" style="color:black !important;" wire:model.defer="district">
                                 <p class="error">
                                     @error('district')
@@ -86,7 +88,7 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
-                                        <p>Phone<span>*</span></p>
+                                        <p>Số điện thoại<span>*</span></p>
                                         <input type="text" style="color:black !important;" wire:model.defer="phone">
                                         <p class="error">
                                             @error('phone')
@@ -108,7 +110,7 @@
                                 </div>
                             </div>
                             <div class="checkout__input">
-                                <p>Order notes<span>*</span></p>
+                                <p>Ghi chú<span>*</span></p>
                                 <input type="text" style="color:black !important;" wire:model.defer="note"
                                     placeholder="Notes about your order.">
                                 <p class="error">
@@ -120,8 +122,8 @@
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="checkout__order">
-                                <h4 class="order__title">Your order</h4>
-                                <div class="checkout__order__products">Product <span>Total</span></div>
+                                <h4 class="order__title">Hóa đơn</h4>
+                                <div class="checkout__order__products">Sản phẩn <span>Tổng tiền</span></div>
                                 <ul class="checkout__total__products">
                                     @php
                                         $index = 0;
@@ -145,7 +147,7 @@
                                     @endforeach
                                 </ul>
                                 <div class="checkout__total__products">
-                                    <h6 class="mb-3">Discount</h6>
+                                    <h6 class="mb-3">Phiếu giảm giá</h6>
                                     <form>
                                         <select class="form-control use w-100" type="text"
                                             wire:change="applyDiscount" wire:model="discount">
@@ -158,18 +160,19 @@
                                     </form>
                                 </div>
                                 <ul class="checkout__total__all">
-                                    <li>Subtotal <span>{{ number_format($totalPrice, 0, ',', ',') }} Đ</span></li>
-                                    <li>Discount <span>{{ number_format($discountprice, 0, ',', ',') }} Đ</span></li>
-                                    <li>Ship <span>{{ number_format($ship, 0, ',', ',') }} Đ</span></li>
-                                    <li>Total
+                                    <li>Tổng tiền sản phẩm <span>{{ number_format($totalPrice, 0, ',', ',') }}
+                                            Đ</span></li>
+                                    <li>Giảm giá <span>{{ number_format($discountprice, 0, ',', ',') }} Đ</span></li>
+                                    <li>Phí vận chuyển <span>{{ number_format($ship, 0, ',', ',') }} Đ</span></li>
+                                    <li>Tổng tiền hóa đơn
                                         <span>{{ number_format($totalPrice - $discountprice + $ship, 0, ',', ',') }}
                                             Đ</span>
                                     </li>
                                 </ul>
                                 <div class="checkout__input__checkbox">
                                     <label for="payment">
-                                        Check Payment
-                                        <input type="radio" wire:model.defer="payment" id="payment" name="paymemt"
+                                        Trả khi giao
+                                        <input type="radio" wire:model="payment" id="payment" name="paymemt"
                                             value=1>
                                         <span class="checkmark"></span>
                                     </label>
@@ -177,7 +180,7 @@
                                 <div class="checkout__input__checkbox">
                                     <label for="paypal">
                                         Paypal
-                                        <input type="radio" wire:model.defer="payment" id="paypal" name="paymemt"
+                                        <input type="radio" wire:model="payment" id="paypal" name="paymemt"
                                             value=2>
                                         <span class="checkmark"></span>
                                     </label>
@@ -187,7 +190,11 @@
                                         <strong>{{ $message }}</strong>
                                     @enderror
                                 </p>
-                                <button type="submit" class="site-btn">PLACE ORDER</button>
+                                @if ($payment == 1)
+                                    <button type="submit" class="site-btn">Tạo hóa đơn</button>
+                                @else
+                                    <div id="paypal-button-container"></div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -195,4 +202,36 @@
             </div>
         </div>
     </section>
+    <script>
+        window.addEventListener('paypal', event => {
+            paypal.Buttons({
+                // Sets up the transaction when a payment button is clicked
+                createOrder: (data, actions) => {
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                value: {{ $totalPrice }} // Can also reference a variable or function
+                            }
+                        }]
+                    });
+                },
+                // Finalize the transaction after payer approval
+                onApprove: (data, actions) => {
+                    return actions.order.capture().then(function(orderData) {
+                        // Successful capture! For dev/demo purposes:
+                        console.log('Capture result', orderData, JSON.stringify(orderData, null,
+                            2));
+                        const transaction = orderData.purchase_units[0].payments.captures[0];
+                        alert('Thanhf coong rooif nhaf');
+                        // When ready to go live, remove the alert and show a success message within this page. For example:
+                        // const element = document.getElementById('paypal-button-container');
+                        // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                        // Or go to another URL:  actions.redirect('thank_you.html');
+                        window.livewire.emit('checkout');
+                    });
+                }
+            }).render('#paypal-button-container');
+
+        })
+    </script>
 </div>

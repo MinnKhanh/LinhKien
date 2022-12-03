@@ -322,8 +322,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <span>Latest News</span>
-                        <h2>Supplier</h2>
+                        {{-- <span>Latest News</span> --}}
+                        <h2>Nhãn hàng</h2>
                     </div>
                 </div>
             </div>
@@ -336,7 +336,7 @@
                             </div>
                             <div class="blog__item__text">
                                 <h5>{{ $item['brand_description'] }}</h5>
-                                <a href="#">Read More</a>
+                                <a href="#">Xem thêm</a>
                             </div>
                         </div>
                     </div>
