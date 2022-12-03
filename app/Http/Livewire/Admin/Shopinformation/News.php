@@ -30,6 +30,7 @@ class News extends Component
     }
     public function render()
     {
+        $this->dispatchBrowserEvent('ckeditor');
         return view('livewire.admin.shopinformation.news');
     }
     public function store()

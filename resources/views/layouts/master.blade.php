@@ -205,13 +205,13 @@
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-3">
+                <div class="col-lg-2 col-md-2">
                     <div class="header__logo">
                         <a href="./index.html"><img id="logo" src="{{ asset('storage/home/logo.png') }}"
                                 alt=""></a>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6">
+                <div class="col-lg-8 col-md-8">
                     <nav class="header__menu mobile-menu">
                         <ul>
                             <li class="{{ $active == 1 ? 'active' : '' }}"><a href="{{ route('home') }}">Trang
@@ -221,21 +221,22 @@
                                     phẩm</a></li>
                             <li class="{{ $active == 3 ? 'active' : '' }}"><a href="#">Trang</a>
                                 <ul class="dropdown">
-                                    <li><a href="{{ route('service.aboutus') }}">Thông tin cửa hàng</a></li>
+                                    {{-- <li><a href="{{ route('service.aboutus') }}">Thông tin cửa hàng</a></li> --}}
                                     <li><a href="{{ route('cart.index') }}">Giỏ hàng</a></li>
-                                    <li><a href="{{ route('service.blog') }}">Tin tức và tài liệu hướng dẫn</a>
+                                    <li><a href="{{ route('service.news') }}">Tin tức và hướng dẫn</a>
                                     </li>
                                     <li><a href="{{ route('service.coupons') }}">Phiếu khuyến mãi</a></li>
                                 </ul>
                             </li>
                             <li class="{{ $active == 4 ? 'active' : '' }}"><a href="{{ route('order.index') }}">Đơn
                                     hàng</a></li>
-                            <li class="{{ $active == 5 ? 'active' : '' }}"><a href="./contact.html">Liên kết</a>
+                            <li class="{{ $active == 5 ? 'active' : '' }}"><a
+                                    href="{{ route('service.contact') }}">Thông tin và Liên hệ</a>
                             </li>
                         </ul>
                     </nav>
                 </div>
-                <div class="col-lg-3 col-md-3">
+                <div class="col-lg-2 col-md-2">
                     <div class="header__nav__option">
                         <a href="#" class="search-switch"><img src="{{ asset('img/icon/search.png') }}"
                                 alt=""></a>

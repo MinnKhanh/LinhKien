@@ -13,6 +13,7 @@ class ServiceController extends Controller
     }
     public function aboutus(Request $request)
     {
+
         return view('service.about_us');
     }
     public function blog(Request $request)
@@ -21,10 +22,19 @@ class ServiceController extends Controller
     }
     public function contact(Request $request)
     {
-        return view('contact.contact');
+        View::share('active', 5);
+        return view('service.contact');
     }
     public function coupons(Request $request)
     {
         return view('service.coupons');
+    }
+    public function news()
+    {
+        return view('service.news');
+    }
+    public function newDetail(Request $request)
+    {
+        return view('service.newdetail', ['new' => $request->new]);
     }
 }

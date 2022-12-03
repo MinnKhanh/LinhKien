@@ -75,7 +75,7 @@
             <div class="col-12">
                 <div class="checkout__input">
                     <p>Nội dung<span>*</span></p>
-                    <input type="text" wire:model.defer="content">
+                    <textarea wire:model.defer="content" name="editor" id="editor" rows="10" cols="100"></textarea>
                     <p class="error">
                         @error('content')
                             <strong>{{ $message }}</strong>
@@ -118,9 +118,15 @@
     </form>
 </div>
 @section('js')
+    <script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('js/ckeditor/style.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function() {
+            window.addEventListener('ckeditor', event => {
+                CKEDITOR.replace('editor');
+            })
+
             $('#category').select2()
             $('#category').on('change', function(e) {
                 var data = $('#category').select2("val");

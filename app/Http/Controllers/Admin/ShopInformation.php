@@ -19,4 +19,8 @@ class ShopInformation extends Controller
     {
         return view('admin.shopinformation.listnews');
     }
+    public function aboutUs()
+    {
+        return view('admin.shopinformation.aboutus');
+    }
 }

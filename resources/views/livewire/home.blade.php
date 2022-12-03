@@ -273,7 +273,7 @@
                                     {{ $item['discount']['discount_user'] ? 'Đã Nhận' : 'Nhận' }}
                                 </button>
                             @else
-                                <a class="btn btn-primary" href="{{ route('auth.login') }}">Nhận</a>
+                                <a class="btn btn-primary" href="{{ route('login') }}">Nhận</a>
                             @endif
                         </div>
                     </div>

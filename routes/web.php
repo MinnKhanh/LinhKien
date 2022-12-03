@@ -62,6 +62,7 @@ Route::group([
 ], static function () {
     Route::get('/aboutus', [ServiceController::class, 'aboutus'])->name('aboutus');
     Route::get('/news', [ServiceController::class, 'news'])->name('news');
+    Route::get('/new-detail', [ServiceController::class, 'newDetail'])->name('newdetail');
     Route::get('/contact', [ServiceController::class, 'contact'])->name('contact');
     Route::get('/coupons', [ServiceController::class, 'coupons'])->name('coupons');
 });
@@ -177,6 +178,8 @@ Route::group([
         Route::get('/create-news', [ShopInformation::class, 'news'])->name('createnew');
         Route::get('/list-news', [ShopInformation::class, 'listnews'])->name('listnews');
         Route::get('/edit-new', [ShopInformation::class, 'editNew'])->name('editnew');
+        Route::get('/aboutus', [ShopInformation::class, 'aboutus'])->name('aboutus');
+        // Route::get('/news', [ShopInformation::class, 'news'])->name('news');
     });
 });
 // Route::get('/test', function () {

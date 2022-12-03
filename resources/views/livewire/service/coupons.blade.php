@@ -55,6 +55,7 @@
                     </div>
                 </div>
             @empty
+                <h4 class="mt-4 mb-4">Hiện bạn không có phiếu giảm giá nào</h4>
             @endforelse
         </div>
     </div>

@@ -180,17 +180,17 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ route('admin.inforshop.aboutus') }}">
                 <i class="fa-solid fa-store menu-icon"></i>
                 <span class="menu-title">Thông tin cửa hàng</span>
             </a>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a class="nav-link" href="#">
                 <i class="fas fa-comment-alt menu-icon"></i>
                 <span class="menu-title">Liên hệ</span>
             </a>
-        </li>
+        </li> --}}
         <li class="mt-5"
             style="    background-color: blue;
     width: 100%;
