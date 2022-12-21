@@ -224,7 +224,7 @@
                                 </ul>
                             </li>
                             <li class=""><a href="{{ route('order.index') }}">Đơn
-                                    hàng</a></li>
+                                    hàng -</a></li>
                             <li class=""><a href="{{ route('service.contact') }}">Thông tin và Liên hệ</a>
                             </li>
                         </ul>
