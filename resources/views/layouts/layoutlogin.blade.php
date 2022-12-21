@@ -261,7 +261,7 @@
                     <div class="footer__widget">
                         <h6>Shopping</h6>
                         <ul>
-                            <li><a href="#">Clothing Store</a></li>
+                            <li><a href="#">Linh kien Store</a></li>
                             <li><a href="#">Trending Shoes</a></li>
                             <li><a href="#">Accessories</a></li>
                             <li><a href="#">Sale</a></li>
