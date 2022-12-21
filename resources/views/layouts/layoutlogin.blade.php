@@ -262,7 +262,7 @@
                         <h6>Shopping</h6>
                         <ul>
                             <li><a href="#">Linh kien Store</a></li>
-                            <li><a href="#">Trending Shoes</a></li>
+                            <li><a href="#">Trending linh kien dep</a></li>
                             <li><a href="#">Accessories</a></li>
                             <li><a href="#">Sale</a></li>
                         </ul>
@@ -283,7 +283,7 @@
                     <div class="footer__widget">
                         <h6>NewLetter</h6>
                         <div class="footer__newslatter">
-                            <p>Be the first to know about new arrivals, look books, sales & promos!</p>
+                            <p>Be the first to know about new arrivals, look tab, news, sales & promos!</p>
                             <form action="#">
                                 <input type="text" placeholder="Your email">
                                 <button type="submit"><span class="icon_mail_alt"></span></button>
