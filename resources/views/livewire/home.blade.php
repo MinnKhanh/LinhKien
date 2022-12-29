@@ -267,13 +267,15 @@
                             @endif
                             {{-- <a href="#" class="primary-btn" data-toggle="modal"
                                 data-target="#discount_{{ $item['id'] }}">Nhận Ngay</a> --}}
-                            @if (auth()->check())
-                                <button type="button" class="primary-btn adddiscount"
-                                    data-id={{ $item['relate_id'] }}>
-                                    {{ $item['discount']['discount_user'] ? 'Đã Nhận' : 'Nhận' }}
-                                </button>
-                            @else
-                                <a class="btn btn-primary" href="{{ route('login') }}">Nhận</a>
+                            @if ($item['expiry'])
+                                @if (auth()->check())
+                                    <button type="button" class="primary-btn adddiscount"
+                                        data-id={{ $item['relate_id'] }}>
+                                        {{ isset($item['discount']['discount_user']) ? 'Đã Nhận' : 'Nhận' }}
+                                    </button>
+                                @else
+                                    <a class="btn btn-primary" href="{{ route('login') }}">Nhận</a>
+                                @endif
                             @endif
                         </div>
                     </div>
