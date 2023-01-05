@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Addvideo;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -39,6 +40,8 @@ use Illuminate\Support\Facades\DB;
 
 Auth::routes();
 
+Route::get('/video', [Addvideo::class, 'index'])->name('video.index');
+Route::post('/video', [Addvideo::class, 'store'])->name('video.create');
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // Route::get('/dash', [AdminController::class, 'index'])->name('dash');
 Route::group([
